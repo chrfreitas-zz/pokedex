@@ -76,6 +76,9 @@ gulp.task('lib:bundle', () => {
     gulp.src('lib/angular/angular.min.js')
         .pipe(gulp.dest('public/lib/angular'));
 
+    gulp.src('lib/angular-route/angular-route.min.js')
+        .pipe(gulp.dest('public/lib/angular-route'));
+
 });
 
 gulp.task('all:bundle', () => {

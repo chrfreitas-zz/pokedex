@@ -1,15 +1,15 @@
 
-describe('Header', function() {
+describe('Home', function() {
 
     var name = 'christian';
 
-    var scope, HeaderController;
+    var scope, HomeController;
     beforeEach(module('app'));
 
     beforeEach(inject(function($rootScope, $controller) {
 
         scope = $rootScope.$new();
-        HeaderController = $controller('HeaderController', {
+        HomeController = $controller('HomeController', {
             $scope: scope
         });
 
