@@ -17,6 +17,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             value: function getResults() {
                 return 'ResultsFinder';
             }
+        }, {
+            key: 'getNothing',
+            value: function getNothing() {
+                return '';
+            }
         }]);
 
         return HeaderController;
@@ -24,24 +29,3 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
     angular.module('app', []).controller('HeaderController', HeaderController);
 })(angular);
-'use strict';
-
-describe('Controller: Header', function () {
-
-    var scope, HeaderController;
-    beforeEach(module('app'));
-
-    beforeEach(inject(function ($rootScope, $controller) {
-
-        scope = $rootScope.$new();
-        HeaderController = $controller('HeaderController', {
-            $scope: scope
-        });
-    }));
-
-    it('Results header', function () {
-
-        console.log(scope);
-        expect(true).toEqual(true);
-    });
-});

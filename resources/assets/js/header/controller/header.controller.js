@@ -6,6 +6,10 @@
         getResults() {
             return 'ResultsFinder';
         }
+
+        getNothing() {
+            return '';
+        }
     }
 
     angular.module('app', []).controller('HeaderController', HeaderController);

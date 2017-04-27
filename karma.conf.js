@@ -1,6 +1,12 @@
 module.exports = function(config) {
   config.set({
     frameworks: ['jasmine'],
+    files: [
+        'lib/angular/angular.js',
+        'lib/angular-mocks/angular-mocks.js',
+        'public/js/*.js',
+        'resources/assets/js/**/*.test.js'
+    ],
     plugins: [
         'karma-phantomjs-launcher',
         'karma-jasmine',
@@ -14,6 +20,13 @@ module.exports = function(config) {
     browsers: [
         'PhantomJS'
     ],
+    preprocessors: {
+        'resources/assets/js/**/*.js': ['coverage']
+    },
+    coverageReporter: {
+        type: 'html',
+        dir: 'coverage'
+     },
     singleRun: false
   });
 };

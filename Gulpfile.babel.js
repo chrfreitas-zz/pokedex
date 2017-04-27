@@ -3,16 +3,29 @@ import babel from 'gulp-babel';
 import concat from 'gulp-concat';
 import less from 'gulp-less';
 import pug from 'gulp-pug';
-import karma from 'gulp-karma';
 import del from 'del';
+import karma from 'karma';
+import webserver from 'gulp-webserver';
 
 
-// tarefas para todos os js da aplicacao
+gulp.task('start', function() {
+
+    gulp.src('app')
+        .pipe(webserver({
+            path:'resources/views',
+            port:'9090',
+            livereload: true,
+            directoryListing: false,
+            open: true
+        }));
+
+});
+
 gulp.task('js:bundle', () => {
 
     gulp.start('js:clean');
 
-    gulp.src('resources/assets/js/**/*.js')
+    gulp.src(['resources/assets/js/**/*.js', '!resources/assets/js/**/*.test.js'])
         .pipe(babel({ presets: ['es2015'] }))
         .pipe(concat('bundle.js'))
         .pipe(gulp.dest('public/js/'));
@@ -28,7 +41,15 @@ gulp.task('js:watch', () => {
     gulp.watch('resources/assets/js/**/*.js', ['js:bundle']);
 });
 
-// tarefa para todos os css da aplicacao
+gulp.task('js:test', () => {
+
+    new karma.Server({
+        configFile: __dirname + '/karma.conf.js',
+        singleRun: true
+    }).start();
+
+})
+
 gulp.task('less:bundle', () => {
 
     gulp.start('less:clean');
@@ -45,46 +66,27 @@ gulp.task('less:clean', () => {
 });
 
 gulp.task('less:watch', () => {
+
     gulp.watch('resources/assets/less/**/*.less', ['less:bundle']);
-});
-
-// tarefa para compilar as views
-gulp.task('views:bundle', () => {
-
-    return gulp.src('resources/views/masterpage.pug')
-               .pipe(pug({
-                   filename: 'teste.html'
-               }))
-});
-
-// tarefa de teste unitario
-gulp.task('test', () => {
-
-    var source = [
-        'lib/angular/angular.js',
-        'lib/angular-mocks/angular-mocks.js',
-        'public/js/*.js',
-        'resources/assets/js/**/*.test.js'
-    ];
-
-
-
-    return gulp.src(source)
-               .pipe(karma({
-                   configFile: 'karma.conf.js',
-                   action: 'run'
-               }))
-               .on('error', function(err) {
-                   console.log(err);
-               });
-})
-
-// tarefa de publicacao
-gulp.task('deploy', () => {
 
 });
 
-// tarefa para rodar todas as tarefas anteriores
+gulp.task('lib:bundle', () => {
+
+    gulp.src('lib/angular/angular.min.js')
+        .pipe(gulp.dest('public/lib/angular'));
+
+});
+
+gulp.task('all:bundle', () => {
+
+    gulp.start('lib:bundle');
+    gulp.start('views:bundle');
+    gulp.start('js:bundle');
+    gulp.start('less:bundle');
+
+});
+
 gulp.task('all:watch', () => {
     gulp.watch(['app/css/**/*.less, app/js/**/*.js'], ['js:watch', 'css:watch'])
 });

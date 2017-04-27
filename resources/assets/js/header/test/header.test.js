@@ -1,5 +1,7 @@
 
-describe('Controller: Header', function() {
+describe('Header', function() {
+
+    var name = 'christian';
 
     var scope, HeaderController;
     beforeEach(module('app'));
@@ -13,10 +15,7 @@ describe('Controller: Header', function() {
 
     }));
 
-    it('Results header', function() {
-
-        console.log(scope);
+    it('Controller: getResults()', function() {
         expect(true).toEqual(true);
-
     });
 });
