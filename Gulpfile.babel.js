@@ -59,7 +59,17 @@ gulp.task('views:bundle', () => {
 
 // tarefa de teste unitario
 gulp.task('test', () => {
-    return gulp.src('public/js/*.js')
+
+    var source = [
+        'lib/angular/angular.js',
+        'lib/angular-mocks/angular-mocks.js',
+        'public/js/*.js',
+        'resources/assets/js/**/*.test.js'
+    ];
+
+
+
+    return gulp.src(source)
                .pipe(karma({
                    configFile: 'karma.conf.js',
                    action: 'run'

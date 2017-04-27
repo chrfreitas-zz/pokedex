@@ -1,13 +1,13 @@
 ((angular) => {
     'use strict';
 
-    class HeaderService {
+    class HeaderController {
 
         getResults() {
             return 'ResultsFinder';
         }
     }
 
-    angular.module('app').service('$header', HeaderService);
-    
+    angular.module('app', []).controller('HeaderController', HeaderController);
+
 })(angular);

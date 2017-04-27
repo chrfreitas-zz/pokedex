@@ -4,23 +4,44 @@ var _createClass = function () { function defineProperties(target, props) { for 
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-(function () {
+(function (angular) {
     'use strict';
 
-    var HeaderService = function () {
-        function HeaderService() {
-            _classCallCheck(this, HeaderService);
+    var HeaderController = function () {
+        function HeaderController() {
+            _classCallCheck(this, HeaderController);
         }
 
-        _createClass(HeaderService, [{
+        _createClass(HeaderController, [{
             key: 'getResults',
             value: function getResults() {
                 return 'ResultsFinder';
             }
         }]);
 
-        return HeaderService;
+        return HeaderController;
     }();
 
-    angular.module('app').service('$header', HeaderService);
-})();
+    angular.module('app', []).controller('HeaderController', HeaderController);
+})(angular);
+'use strict';
+
+describe('Controller: Header', function () {
+
+    var scope, HeaderController;
+    beforeEach(module('app'));
+
+    beforeEach(inject(function ($rootScope, $controller) {
+
+        scope = $rootScope.$new();
+        HeaderController = $controller('HeaderController', {
+            $scope: scope
+        });
+    }));
+
+    it('Results header', function () {
+
+        console.log(scope);
+        expect(true).toEqual(true);
+    });
+});
