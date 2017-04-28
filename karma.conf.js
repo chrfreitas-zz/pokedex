@@ -2,9 +2,9 @@ module.exports = function(config) {
   config.set({
     frameworks: ['jasmine'],
     files: [
-        'lib/angular/angular.js',
-        'lib/angular-mocks/angular-mocks.js',
-        'lib/angular-route/angular-route.js',
+        'vendor/angular/angular.js',
+        'vendor/angular-mocks/angular-mocks.js',
+        'vendor/angular-route/angular-route.js',
         'public/js/*.js',
         'resources/assets/js/**/*.test.js'
     ],
