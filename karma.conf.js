@@ -4,15 +4,17 @@ module.exports = function(config) {
     files: [
         'lib/angular/angular.js',
         'lib/angular-mocks/angular-mocks.js',
+        'lib/angular-route/angular-route.js',
         'public/js/*.js',
         'resources/assets/js/**/*.test.js'
     ],
     plugins: [
         'karma-phantomjs-launcher',
         'karma-jasmine',
-        'karma-coverage'
+        'karma-coverage',
+        'karma-spec-reporter'
     ],
-    reporters: ['progress', 'coverage'],
+    reporters: ['spec' ,'coverage'],
     port: 9876,
     colors: true,
     logLevel: config.LOG_INFO,
@@ -26,7 +28,8 @@ module.exports = function(config) {
     coverageReporter: {
         type: 'html',
         dir: 'coverage'
-     },
+    },
     singleRun: false
+
   });
 };

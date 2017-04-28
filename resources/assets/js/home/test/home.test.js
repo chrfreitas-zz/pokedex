@@ -1,21 +1,26 @@
 
 describe('Home', function() {
 
-    var name = 'christian';
-
     var scope, HomeController;
+
     beforeEach(module('app'));
 
     beforeEach(inject(function($rootScope, $controller) {
 
         scope = $rootScope.$new();
-        HomeController = $controller('HomeController', {
-            $scope: scope
+        HomeController = $controller('HomeController as home', {
+            '$scope': scope
         });
 
     }));
 
-    it('Controller: getResults()', function() {
-        expect(true).toEqual(true);
+
+    it('should have assigned right pattern to numberPattern', function(){
+
+        console.log(scope.home.chris);
+        expect(true).toBe(true);
+
     });
+
+
 });

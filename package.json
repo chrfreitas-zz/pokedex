@@ -23,11 +23,13 @@
     "gulp-babel": "^6.1.2",
     "gulp-concat": "^2.6.1",
     "gulp-jasmine": "^2.4.2",
+    "gulp-jshint": "^2.0.4",
     "gulp-less": "^3.3.0",
     "http-server": "^0.9.0",
     "karma": "^1.6.0",
     "karma-coverage": "^1.1.1",
     "karma-jasmine": "^1.1.0",
-    "karma-phantomjs-launcher": "^1.0.4"
+    "karma-phantomjs-launcher": "^1.0.4",
+    "karma-spec-reporter": "0.0.31"
   }
 }

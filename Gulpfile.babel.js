@@ -5,31 +5,18 @@ import less from 'gulp-less';
 import pug from 'gulp-pug';
 import del from 'del';
 import karma from 'karma';
-import webserver from 'gulp-webserver';
-
-
-gulp.task('start', function() {
-
-    gulp.src('app')
-        .pipe(webserver({
-            path:'resources/views',
-            port:'9090',
-            livereload: true,
-            directoryListing: false,
-            open: true
-        }));
-
-});
+import jshint from 'gulp-jshint';
 
 gulp.task('js:bundle', () => {
 
     gulp.start('js:clean');
 
     gulp.src(['resources/assets/js/**/*.js', '!resources/assets/js/**/*.test.js'])
+        .pipe(jshint())
+        .pipe(jshint.reporter('default'))
         .pipe(babel({ presets: ['es2015'] }))
         .pipe(concat('bundle.js'))
         .pipe(gulp.dest('public/js/'));
-
 });
 
 gulp.task('js:clean', () => {

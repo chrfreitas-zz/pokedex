@@ -1,18 +1,15 @@
 ((angular) => {
+
     'use strict';
 
     class HomeController {
 
-        constructor($http){
-            this.$http = $http;
-        }
-
         getPokemons(){
-            return
+            return 'Pokemons';
         }
 
     }
 
     angular.module('app').controller('HomeController', HomeController);
 
-})(angular);
+})(window.angular);
