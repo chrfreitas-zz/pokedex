@@ -6,6 +6,7 @@ import pug from 'gulp-pug';
 import del from 'del';
 import karma from 'karma';
 import jshint from 'gulp-jshint';
+import autoprefixer from 'gulp-autoprefixer';
 
 gulp.task('js:bundle', () => {
 
@@ -43,6 +44,7 @@ gulp.task('less:bundle', () => {
 
     gulp.src('resources/assets/less/**/*.less')
         .pipe(less())
+        .pipe(autoprefixer())
         .pipe(concat('style.css'))
         .pipe(gulp.dest('public/css/'));
 });
