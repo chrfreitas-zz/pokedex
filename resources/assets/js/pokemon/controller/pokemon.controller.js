@@ -2,19 +2,23 @@
 
     'use strict';
 
+
     class PokemonController {
 
-        constructor($pokedex, $routeParams){
+        constructor($pokedex, PokemonModel, $routeParams){
 
             /**
             * Services
             */
             this.$pokedex = $pokedex;
+            this.PokemonModel = PokemonModel;
 
             /**
             * Properties
             */
-            this.id = $routeParams.id;
+            this.pokemon = {};
+            this.routeId = $routeParams.id;
+
         }
 
         /**
@@ -22,8 +26,8 @@
         */
          init(){
 
-            this.$pokedex.get('pokemon', this.id).then((response) => {
-                console.log(response);
+            this.$pokedex.get('pokemon', this.routeId).then((response) => {
+                this.pokemon = new this.PokemonModel(response);
             });
 
         }
