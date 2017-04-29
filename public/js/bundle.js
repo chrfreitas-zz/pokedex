@@ -185,6 +185,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                 this.$pokedex.get('pokemon', this.routeId).then(function (response) {
                     _this.pokemon = new _this.PokemonModel(response);
                 });
+
+                return true;
             }
         }]);
 

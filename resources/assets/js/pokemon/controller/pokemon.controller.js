@@ -30,6 +30,8 @@
                 this.pokemon = new this.PokemonModel(response);
             });
 
+
+            return true;
         }
 
     }
