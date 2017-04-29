@@ -155,6 +155,55 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
     'use strict';
 
+    var CommentController = function () {
+        function CommentController(CommentModel) {
+            _classCallCheck(this, CommentController);
+
+            /**
+            *   Services
+            */
+            this.CommentModel = CommentModel;
+
+            /**
+            *   Properties
+            */
+            this.user = '';
+            this.text = '';
+        }
+
+        /**
+        * Save the comment
+        */
+
+
+        _createClass(CommentController, [{
+            key: 'send',
+            value: function send(name) {
+
+                var comment = new this.CommentModel({
+                    user: this.user,
+                    text: this.text
+                });
+
+                comment.save(name);
+            }
+        }]);
+
+        return CommentController;
+    }();
+
+    angular.module('app').controller('CommentController', CommentController);
+})(window.angular);
+'use strict';
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+(function (angular) {
+
+    'use strict';
+
     var PokemonController = function () {
         function PokemonController($pokedex, PokemonModel, $routeParams) {
             _classCallCheck(this, PokemonController);
@@ -195,6 +244,50 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
     angular.module('app').controller('PokemonController', PokemonController);
 })(window.angular);
+'use strict';
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+(function (angular, firebase) {
+
+    'use strict';
+
+    var CommentModel = function () {
+        function CommentModel(params) {
+            _classCallCheck(this, CommentModel);
+
+            this.user = params.user;
+            this.text = params.text;
+        }
+
+        _createClass(CommentModel, [{
+            key: 'save',
+            value: function save(name) {
+                var d = firebase.database().ref(name);
+
+                d.set({
+                    user: this.user,
+                    text: this.text
+                });
+
+                d.on('value', function (snap) {
+                    console.log(snap);
+                });
+            }
+        }], [{
+            key: 'instance',
+            value: function instance() {
+                return CommentModel;
+            }
+        }]);
+
+        return CommentModel;
+    }();
+
+    angular.module('app').factory('CommentModel', CommentModel.instance);
+})(window.angular, window.firebase);
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();

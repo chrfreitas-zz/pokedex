@@ -11,8 +11,26 @@
     <main ng-view>
     </main>
 
+
+    <script src="https://www.gstatic.com/firebasejs/3.9.0/firebase.js"></script>
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyAGLkJaKvJ5ARRekFZrRA0BgM-YW_1vnYU",
+            authDomain: "pokedex-42bef.firebaseapp.com",
+            databaseURL: "https://pokedex-42bef.firebaseio.com",
+            projectId: "pokedex-42bef",
+            storageBucket: "pokedex-42bef.appspot.com",
+            messagingSenderId: "912219140054"
+        };
+        
+        firebase.initializeApp(config);
+    </script>
+
     <script src="vendor/angular/angular.min.js"></script>
     <script src="vendor/angular-route/angular-route.min.js"></script>
     <script src="js/bundle.js"></script>
+
+
 </body>
 </html>

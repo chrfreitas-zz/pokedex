@@ -34,6 +34,7 @@
             return true;
         }
 
+
     }
 
     angular.module('app').controller('PokemonController', PokemonController);

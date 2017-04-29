@@ -3,4 +3,12 @@
     <div ng-bind="pokemonCtrl.pokemon.name">
     </div>
 
+    <div ng-controller="CommentController as commentCtrl">
+        <form ng-submit="commentCtrl.send(pokemonCtrl.pokemon.name)">
+            <input ng-model="commentCtrl.user" type="text" placeholder="name">
+            <textarea ng-model="commentCtrl.text" name="name" rows="8" cols="40"></textarea>
+            <button type="submit" name="button">Comment</button>
+        </form>
+    </div>
+
 </div>
