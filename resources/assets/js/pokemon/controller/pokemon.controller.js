@@ -2,17 +2,23 @@
 
     'use strict';
 
-    class DetailController {
+    class PokemonController {
 
         constructor($pokedex, $routeParams){
 
+            /**
+            * Services
+            */
             this.$pokedex = $pokedex;
 
+            /**
+            * Properties
+            */
             this.id = $routeParams.id;
         }
 
         /**
-        * Initialize DetailController
+        * Initialize PokemonController
         */
          init(){
 
@@ -24,6 +30,6 @@
 
     }
 
-    angular.module('app').controller('DetailController', DetailController);
+    angular.module('app').controller('PokemonController', PokemonController);
 
 })(window.angular);

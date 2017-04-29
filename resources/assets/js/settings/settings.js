@@ -10,11 +10,11 @@
 
        $routeProvider
        .when('/', {
-          templateUrl : '../views/list.html'
+          templateUrl : '../views/pokedex.html'
        })
 
        .when('/pokemon/:id', {
-          templateUrl : '../views/detail.html'
+          templateUrl : '../views/pokemon.html'
        })
 
        .otherwise ({ redirectTo: '/' });

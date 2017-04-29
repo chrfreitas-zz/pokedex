@@ -2,7 +2,7 @@
 
     'use strict';
 
-    class ListController {
+    class PokedexController {
 
         constructor($pokedex){
 
@@ -11,21 +11,24 @@
             */
             this.$pokedex = $pokedex;
 
-            this.pokemons = [];
+            /**
+            * Properties
+            */
+            this.items = [];
         }
 
         /**
-        * Initialize ListController
+        * Initialize PokedexController
         */
         init(){
 
             this.$pokedex.get('pokemon').then((response) => {
-                this.pokemons = response;
+                this.items = response;
             });
         }
 
     }
 
-    angular.module('app').controller('ListController', ListController);
+    angular.module('app').controller('PokedexController', PokedexController);
 
 })(window.angular);

@@ -46,9 +46,7 @@
                 }
 
                 // It's necessary because the api doesn't has a pattern for responses
-                if(response.results){
-                    response = response.data.results;
-                }
+                response = response.results || response;
 
                 defer.resolve(response);
             });

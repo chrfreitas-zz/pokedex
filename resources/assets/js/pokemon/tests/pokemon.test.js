@@ -1,14 +1,14 @@
 
-describe('List', function() {
+describe('Pokemon', function() {
 
-    var scope, ListController;
+    var scope, PokemonController;
 
     beforeEach(module('app'));
 
     beforeEach(inject(function($rootScope, $controller) {
 
         scope = $rootScope.$new();
-        ListController = $controller('ListController as home', {
+        PokemonController = $controller('PokemonController as home', {
             '$scope': scope
         });
 

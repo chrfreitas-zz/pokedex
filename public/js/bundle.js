@@ -11,9 +11,9 @@
       $locationProvider.html5Mode(true);
 
       $routeProvider.when('/', {
-         templateUrl: '../views/list.html'
+         templateUrl: '../views/pokedex.html'
       }).when('/pokemon/:id', {
-         templateUrl: '../views/detail.html'
+         templateUrl: '../views/pokemon.html'
       }).otherwise({ redirectTo: '/' });
    });
 })(window.angular);
@@ -27,21 +27,27 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
     'use strict';
 
-    var DetailController = function () {
-        function DetailController($pokedex, $routeParams) {
-            _classCallCheck(this, DetailController);
+    var PokemonController = function () {
+        function PokemonController($pokedex, $routeParams) {
+            _classCallCheck(this, PokemonController);
 
+            /**
+            * Services
+            */
             this.$pokedex = $pokedex;
 
+            /**
+            * Properties
+            */
             this.id = $routeParams.id;
         }
 
         /**
-        * Initialize DetailController
+        * Initialize PokemonController
         */
 
 
-        _createClass(DetailController, [{
+        _createClass(PokemonController, [{
             key: 'init',
             value: function init() {
 
@@ -51,11 +57,12 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             }
         }]);
 
-        return DetailController;
+        return PokemonController;
     }();
 
-    angular.module('app').controller('DetailController', DetailController);
+    angular.module('app').controller('PokemonController', PokemonController);
 })(window.angular);
+"use strict";
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -66,52 +73,41 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
     'use strict';
 
-    var ListController = function () {
-        function ListController($pokedex) {
-            _classCallCheck(this, ListController);
+    var PokedexController = function () {
+        function PokedexController($pokedex) {
+            _classCallCheck(this, PokedexController);
 
             /**
             * Services
             */
             this.$pokedex = $pokedex;
 
-            this.pokemons = [];
+            /**
+            * Properties
+            */
+            this.items = [];
         }
 
         /**
-        * Initialize ListController
+        * Initialize PokedexController
         */
 
 
-        _createClass(ListController, [{
+        _createClass(PokedexController, [{
             key: 'init',
             value: function init() {
                 var _this = this;
 
                 this.$pokedex.get('pokemon').then(function (response) {
-                    _this.pokemons = response;
+                    _this.items = response;
                 });
             }
         }]);
 
-        return ListController;
+        return PokedexController;
     }();
 
-    angular.module('app').controller('ListController', ListController);
-})(window.angular);
-'use strict';
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-(function (angular) {
-
-    'use strict';
-
-    var MainController = function MainController() {
-        _classCallCheck(this, MainController);
-    };
-
-    angular.module('app').controller('MainController', MainController);
+    angular.module('app').controller('PokedexController', PokedexController);
 })(window.angular);
 'use strict';
 
@@ -176,9 +172,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                     }
 
                     // It's necessary because the api doesn't has a pattern for responses
-                    if (response.results) {
-                        response = response.data.results;
-                    }
+                    response = response.results || response;
 
                     defer.resolve(response);
                 });

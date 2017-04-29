@@ -1,6 +1,6 @@
-<div ng-controller="ListController as list" ng-init="list.init()">
+<div ng-controller="PokedexController as pokedex" ng-init="pokedex.init()">
     <ul>
-        <li ng-repeat="pokemon in list.pokemons">
+        <li ng-repeat="pokemon in pokedex.items">
             <div ng-bind="pokemon.name">
             </div>
             <a ng-href="/pokemon/{{pokemon.name}}">
