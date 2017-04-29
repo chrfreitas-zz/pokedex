@@ -15,15 +15,15 @@
         }
 
         /**
-        * Initialize list
+        * Initialize ListController
         */
         init(){
 
-            this.$pokedex.getPokemons().then((response) => {
-                this.pokemons = response.data.results;
+            this.$pokedex.get('pokemon').then((response) => {
+                this.pokemons = response;
             });
         }
-        
+
     }
 
     angular.module('app').controller('ListController', ListController);

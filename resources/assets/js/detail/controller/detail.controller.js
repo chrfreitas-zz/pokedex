@@ -6,23 +6,17 @@
 
         constructor($pokedex, $routeParams){
 
-            /**
-            * Services
-            */
             this.$pokedex = $pokedex;
 
             this.id = $routeParams.id;
-
         }
 
         /**
-        * Initialize list
+        * Initialize DetailController
         */
-        init(){
+         init(){
 
-            var url = this.id;
-
-            this.$pokedex.getDetails(url).then((response) => {
+            this.$pokedex.get('pokemon', this.id).then((response) => {
                 console.log(response);
             });
 

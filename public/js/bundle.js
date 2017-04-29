@@ -31,16 +31,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         function DetailController($pokedex, $routeParams) {
             _classCallCheck(this, DetailController);
 
-            /**
-            * Services
-            */
             this.$pokedex = $pokedex;
 
             this.id = $routeParams.id;
         }
 
         /**
-        * Initialize list
+        * Initialize DetailController
         */
 
 
@@ -48,9 +45,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             key: 'init',
             value: function init() {
 
-                var url = this.id;
-
-                this.$pokedex.getDetails(url).then(function (response) {
+                this.$pokedex.get('pokemon', this.id).then(function (response) {
                     console.log(response);
                 });
             }
@@ -84,7 +79,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         }
 
         /**
-        * Initialize list
+        * Initialize ListController
         */
 
 
@@ -93,8 +88,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             value: function init() {
                 var _this = this;
 
-                this.$pokedex.getPokemons().then(function (response) {
-                    _this.pokemons = response.data.results;
+                this.$pokedex.get('pokemon').then(function (response) {
+                    _this.pokemons = response;
                 });
             }
         }]);
@@ -128,26 +123,67 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
     'use strict';
 
-    var URL_API = 'http://pokeapi.co/api/v2/';
+    /**
+    * Constants of the service
+    */
+
+    var URL_API = 'http://pokeapi.co/api/v2/',
+        DEFAULT_ROUTE = 'pokemon';
+
+    /**
+    * Build route for request
+    */
+    function buildRoute() {
+        var route = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : DEFAULT_ROUTE;
+        var id = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
+
+
+        route = URL_API + route;
+
+        if (id) {
+            route += '/' + id;
+        }
+
+        return route;
+    }
 
     var PokedexService = function () {
-        function PokedexService($http) {
+        function PokedexService($http, $q) {
             _classCallCheck(this, PokedexService);
 
             this.$http = $http;
+            this.$q = $q;
         }
 
+        /**
+        * Method to get data at API
+        */
+
+
         _createClass(PokedexService, [{
-            key: 'getPokemons',
-            value: function getPokemons() {
-                var url = URL_API + 'pokemon/';
-                return this.$http.get(url);
-            }
-        }, {
-            key: 'getDetails',
-            value: function getDetails(id) {
-                var url = URL_API + 'pokemon/' + id;
-                return this.$http.get(url);
+            key: 'get',
+            value: function get(route, id) {
+
+                var defer = this.$q.defer(),
+                    url = buildRoute(route, id);
+
+                this.$http.get(url).then(function (response) {
+
+                    response = response.data;
+
+                    if (!response) {
+                        defer.reject('There isn\'t result');
+                    }
+
+                    // It's necessary because the api doesn't has a pattern for responses
+                    if (response.results) {
+                        response = response.data.results;
+                    }
+
+                    defer.resolve(response);
+                });
+
+                return defer.promise;
             }
         }]);
 
