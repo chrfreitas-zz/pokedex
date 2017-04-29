@@ -25,6 +25,8 @@
             this.$pokedex.get('pokemon').then((response) => {
                 this.items = response;
             });
+
+            return true;
         }
 
     }

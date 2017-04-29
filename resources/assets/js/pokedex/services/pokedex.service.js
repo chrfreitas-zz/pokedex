@@ -8,19 +8,6 @@
     const URL_API = 'http://pokeapi.co/api/v2/',
           DEFAULT_ROUTE = 'pokemon';
 
-    /**
-    * Build route for request
-    */
-    function buildRoute(route = DEFAULT_ROUTE, id = 0) {
-
-        route = URL_API + route;
-
-        if(id){
-            route += `/${id}`;
-        }
-
-        return route;
-    }
 
     class PokedexService {
 
@@ -35,7 +22,7 @@
         get(route, id) {
 
             let defer = this.$q.defer(),
-                url = buildRoute(route, id);
+                url = this.getRoute(route, id);
 
             this.$http.get(url).then((response)=> {
 
@@ -53,6 +40,21 @@
 
             return defer.promise;
         }
+
+        /**
+        * Build route for request
+        */
+        getRoute(route = DEFAULT_ROUTE, id = 0) {
+
+            route = URL_API + route;
+
+            if(id){
+                route += `/${id}`;
+            }
+
+            return route;
+        }
+
 
     }
 

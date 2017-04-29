@@ -55,6 +55,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                 this.$pokedex.get('pokemon').then(function (response) {
                     _this.items = response;
                 });
+
+                return true;
             }
         }]);
 
@@ -80,23 +82,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     var URL_API = 'http://pokeapi.co/api/v2/',
         DEFAULT_ROUTE = 'pokemon';
 
-    /**
-    * Build route for request
-    */
-    function buildRoute() {
-        var route = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : DEFAULT_ROUTE;
-        var id = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
-
-
-        route = URL_API + route;
-
-        if (id) {
-            route += '/' + id;
-        }
-
-        return route;
-    }
-
     var PokedexService = function () {
         function PokedexService($http, $q) {
             _classCallCheck(this, PokedexService);
@@ -115,7 +100,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             value: function get(route, id) {
 
                 var defer = this.$q.defer(),
-                    url = buildRoute(route, id);
+                    url = this.getRoute(route, id);
 
                 this.$http.get(url).then(function (response) {
 
@@ -132,6 +117,26 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                 });
 
                 return defer.promise;
+            }
+
+            /**
+            * Build route for request
+            */
+
+        }, {
+            key: 'getRoute',
+            value: function getRoute() {
+                var route = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : DEFAULT_ROUTE;
+                var id = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
+
+
+                route = URL_API + route;
+
+                if (id) {
+                    route += '/' + id;
+                }
+
+                return route;
             }
         }]);
 
