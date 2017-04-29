@@ -1,0 +1,11 @@
+<div ng-controller="ListController as list" ng-init="list.init()">
+    <ul>
+        <li ng-repeat="pokemon in list.pokemons">
+            <div ng-bind="pokemon.name">
+            </div>
+            <a href="/pokemon/{{pokemon.name}}">
+                Detalhes
+            </a>
+        </li>
+    </ul>
+</div>

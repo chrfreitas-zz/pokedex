@@ -15,6 +15,11 @@
             return this.$http.get(url);
         }
 
+        getDetails(id) {
+            let url = URL_API + 'pokemon/' + id;
+            return this.$http.get(url);
+        }
+
     }
 
     angular.module('app').service('$pokedex', PokedexService);

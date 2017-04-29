@@ -23,12 +23,7 @@
                 this.pokemons = response.data.results;
             });
         }
-
-        detail(){
-            
-
-        }
-
+        
     }
 
     angular.module('app').controller('ListController', ListController);
