@@ -1,9 +1,22 @@
 <div ng-controller="HomeController as home">
 
-    <ul>
-        <li>
-            Ola
-        </li>
-    </ul>
+    <nav>
+        Menu
+    </nav>
+
+    <div ng-controller="ListController as list" ng-init="list.init()">
+
+        <ul>
+            <li ng-repeat="pokemon in list.pokemons">
+                <div ng-bind="pokemon.name">
+                </div>
+                <button ng-click="list.details()">
+                    Detalhes
+                </button>
+            </li>
+        </ul>
+
+
+    </div>
 
 </div>

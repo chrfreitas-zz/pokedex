@@ -7,6 +7,7 @@ import del from 'del';
 import karma from 'karma';
 import jshint from 'gulp-jshint';
 import autoprefixer from 'gulp-autoprefixer';
+import sourcemaps from 'gulp-sourcemaps';
 
 gulp.task('js:bundle', () => {
 
@@ -14,9 +15,11 @@ gulp.task('js:bundle', () => {
 
     gulp.src(['resources/assets/js/**/*.js', '!resources/assets/js/**/*.test.js'])
         .pipe(jshint())
+        .pipe(sourcemaps.init())
         .pipe(jshint.reporter('default'))
         .pipe(babel({ presets: ['es2015'] }))
         .pipe(concat('bundle.js'))
+        .pipe(sourcemaps.write('.'))
         .pipe(gulp.dest('public/js/'));
 });
 

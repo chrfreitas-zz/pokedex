@@ -4,8 +4,8 @@
 
     class HomeController {
 
-        getPokemons(){
-            return 'Pokemons';
+        constructor(){
+            
         }
 
     }
