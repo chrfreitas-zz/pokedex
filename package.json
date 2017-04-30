@@ -4,7 +4,8 @@
   "main": "Gulpfile.babel.js",
   "scripts": {
     "test": "gulp js:test",
-    "start": "cd public/ && angular-http-server"
+    "start": "cd public/ && angular-http-server",
+    "deploy": "cd public/ && aero deploy"
   },
   "repository": {
     "type": "git",

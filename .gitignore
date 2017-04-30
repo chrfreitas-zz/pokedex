@@ -1,3 +1,4 @@
 /node_modules
 /vendor
 /coverage
+/public/aero-deploy.tar.gz
