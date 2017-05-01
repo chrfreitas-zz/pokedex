@@ -155,23 +155,27 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
     'use strict';
 
+    var scope = {};
+
     var PokemonController = function () {
         function PokemonController($pokedex, $routeParams, CommentModel, PokemonModel) {
             _classCallCheck(this, PokemonController);
 
+            scope = this;
+
             /**
             * Services
             */
-            this.$pokedex = $pokedex;
-            this.$routeParams = $routeParams;
-            this.PokemonModel = PokemonModel;
-            this.CommentModel = CommentModel;
+            scope.$pokedex = $pokedex;
+            scope.$routeParams = $routeParams;
+            scope.PokemonModel = PokemonModel;
+            scope.CommentModel = CommentModel;
 
             /**
             * Properties
             */
-            this.pokemon = {};
-            this.comment = {};
+            scope.pokemon = {};
+            scope.comment = {};
         }
 
         /**
@@ -182,11 +186,17 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         _createClass(PokemonController, [{
             key: 'init',
             value: function init() {
-                var _this = this;
 
-                this.$pokedex.get('pokemon', this.$routeParams.id).then(function (response) {
-                    _this.pokemon = _this.PokemonModel;
-                    _this.pokemon.setData(response);
+                scope.$pokedex.get('pokemon', scope.$routeParams.id).then(function (response) {
+                    scope.pokemon = scope.PokemonModel;
+                    scope.pokemon.setData(response);
+
+                    scope.comment = scope.CommentModel;
+                    scope.comment.setData(scope.pokemon);
+
+                    scope.comment.get().then(function (response) {
+                        scope.comment.all = response;
+                    });
                 });
 
                 return true;
@@ -194,10 +204,15 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         }, {
             key: 'sendComment',
             value: function sendComment() {
-                this.pokemon.comment.save(this.comment.user, this.comment.text);
+                scope.pokemon.comment.save(scope.comment.user, scope.comment.text);
 
-                this.comment.user = '';
-                this.comment.text = '';
+                scope.clearFormComments();
+            }
+        }, {
+            key: 'clearFormComments',
+            value: function clearFormComments() {
+                scope.comment.user = '';
+                scope.comment.text = '';
             }
         }]);
 
@@ -217,57 +232,63 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     'use strict';
 
     var CommentModel = function () {
-        function CommentModel() {
+        function CommentModel($q) {
             _classCallCheck(this, CommentModel);
 
-            this.all = [];
+            /**
+            * Services
+            */
+            this.$q = $q;
 
-            this.get();
+            /**
+            * Properties
+            */
+            this.pokemon = '';
         }
 
         _createClass(CommentModel, [{
             key: 'setData',
             value: function setData(params) {
-                this.pokemonName = params.name;
+                this.pokemon = params.name;
             }
         }, {
             key: 'save',
-            value: function save(user, text) {
+            value: function save(user, text, old) {
+                var db = firebase.database().ref(this.pokemon);
 
-                var db = firebase.database().ref(this.pokemonName);
-
-                this.all.push({
+                old.push({
                     user: user,
                     text: text
                 });
 
-                db.set(this.all);
+                db.set(old);
             }
         }, {
             key: 'get',
             value: function get() {
-                var _this = this;
 
-                var db = firebase.database().ref(this.pokemonName);
+                var db = firebase.database().ref(this.pokemon),
+                    defer = this.$q.defer();
 
                 db.once('value').then(function (response) {
-
-                    if (response.val() && response.val()[_this.pokemonName]) {
-                        _this.all = response.val()[_this.pokemonName];
-                    }
+                    defer.resolve(response.val());
+                }).catch(function (err) {
+                    defer.reject(err);
                 });
+
+                return defer.promise;
             }
         }], [{
-            key: 'instance',
-            value: function instance() {
-                return CommentModel;
+            key: 'create',
+            value: function create($q) {
+                return new CommentModel($q);
             }
         }]);
 
         return CommentModel;
     }();
 
-    angular.module('app').factory('CommentModel', CommentModel.instance);
+    angular.module('app').factory('CommentModel', CommentModel.create);
 })(window.angular, window.firebase);
 'use strict';
 
@@ -280,10 +301,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     'use strict';
 
     var PokemonModel = function () {
-        function PokemonModel(CommentModel) {
+        function PokemonModel() {
             _classCallCheck(this, PokemonModel);
 
-            this.CommentModel = CommentModel;
+            this.name = '';
         }
 
         _createClass(PokemonModel, [{
@@ -292,14 +313,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                 var params = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
                 this.name = params.name;
-
-                this.comment = new this.CommentModel();
-                this.comment.setData(this);
             }
         }], [{
             key: 'create',
-            value: function create(CommentModel) {
-                return new PokemonModel(CommentModel);
+            value: function create() {
+                return new PokemonModel();
             }
         }]);
 

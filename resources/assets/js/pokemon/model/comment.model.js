@@ -4,47 +4,56 @@
 
     class CommentModel {
 
-        constructor() {
-            this.all = [];
+        constructor($q) {
 
-            this.get();
+            /**
+            * Services
+            */
+            this.$q = $q;
+
+
+            /**
+            * Properties
+            */
+            this.pokemon = '';
+
         }
 
         setData(params){
-            this.pokemonName = params.name;
+            this.pokemon = params.name;
         }
 
-        save(user, text){
+        save(user, text, old){
+            let db = firebase.database().ref(this.pokemon);
 
-            let db = firebase.database().ref(this.pokemonName);
-
-            this.all.push({
+            old.push({
                 user,
                 text
             });
 
-            db.set(this.all);
+            db.set(old);
         }
 
         get() {
-            let db = firebase.database().ref(this.pokemonName);
+
+            let db = firebase.database().ref(this.pokemon),
+                defer = this.$q.defer();
 
             db.once('value').then((response) => {
-
-                if(response.val() && response.val()[this.pokemonName]){
-                    this.all = response.val()[this.pokemonName];
-                }
-
+                defer.resolve(response.val());
+            }).catch((err) => {
+                defer.reject(err);
             });
+
+            return defer.promise;
         }
 
-
-        static instance(){
-            return CommentModel;
+        static create($q){
+            return new CommentModel($q);
         }
 
     }
 
-    angular.module('app').factory('CommentModel', CommentModel.instance);
+    angular.module('app').factory('CommentModel', CommentModel.create);
 
 })(window.angular, window.firebase);

@@ -4,21 +4,17 @@
 
     class PokemonModel {
 
-        constructor(CommentModel) {
-            this.CommentModel = CommentModel;
+        constructor() {
+            this.name = '';
         }
 
         setData(params = {}){
             this.name = params.name;
-
-            this.comment = new this.CommentModel();
-            this.comment.setData(this);
         }
 
-        static create(CommentModel){
-            return new PokemonModel(CommentModel);
+        static create(){
+            return new PokemonModel();
         }
-
 
     }
 

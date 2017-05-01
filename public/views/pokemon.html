@@ -11,4 +11,13 @@
         </form>
     </div>
 
+    <div>
+        <ul>
+            <li ng-repeat="comment in pokemonCtrl.comment.all">
+                <span ng-bind="comment.user"></span>
+                <span ng-bind="comment.text"></span>
+            </li>
+        </ul>
+    </div>
+
 </div>

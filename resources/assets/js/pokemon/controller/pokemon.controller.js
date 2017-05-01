@@ -2,23 +2,27 @@
 
     'use strict';
 
+    var scope = {};
+
     class PokemonController {
 
         constructor($pokedex, $routeParams, CommentModel, PokemonModel){
 
+            scope = this;
+
             /**
             * Services
             */
-            this.$pokedex = $pokedex;
-            this.$routeParams = $routeParams;
-            this.PokemonModel = PokemonModel;
-            this.CommentModel = CommentModel;
+            scope.$pokedex = $pokedex;
+            scope.$routeParams = $routeParams;
+            scope.PokemonModel = PokemonModel;
+            scope.CommentModel = CommentModel;
 
             /**
             * Properties
             */
-            this.pokemon = {};
-            this.comment = {};
+            scope.pokemon = {};
+            scope.comment = {};
         }
 
         /**
@@ -26,19 +30,31 @@
         */
          init(){
 
-            this.$pokedex.get('pokemon', this.$routeParams.id).then((response) => {
-                this.pokemon = this.PokemonModel;
-                this.pokemon.setData(response);
+            scope.$pokedex.get('pokemon', scope.$routeParams.id).then((response) => {
+                scope.pokemon = scope.PokemonModel;
+                scope.pokemon.setData(response);
+
+                scope.comment = scope.CommentModel;
+                scope.comment.setData(scope.pokemon);
+
+                scope.comment.get().then(function(response) {
+                    scope.comment.all = response;
+                });
+
             });
 
             return true;
         }
 
         sendComment(){
-            this.pokemon.comment.save(this.comment.user, this.comment.text);
+            scope.pokemon.comment.save(scope.comment.user, scope.comment.text);
 
-            this.comment.user = '';
-            this.comment.text = '';
+            scope.clearFormComments();
+        }
+
+        clearFormComments(){
+            scope.comment.user = '';
+            scope.comment.text = '';
         }
 
     }
