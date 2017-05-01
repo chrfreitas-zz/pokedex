@@ -194,7 +194,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         }, {
             key: 'sendComment',
             value: function sendComment() {
-                debugger;
                 this.pokemon.comment.save(this.comment.user, this.comment.text);
 
                 this.comment.user = '';
@@ -220,6 +219,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     var CommentModel = function () {
         function CommentModel() {
             _classCallCheck(this, CommentModel);
+
+            this.all = [];
 
             this.get();
         }
@@ -251,9 +252,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
                 db.once('value').then(function (response) {
 
-                    _this.all = [];
-
-                    if (response.val()) {
+                    if (response.val() && response.val()[_this.pokemonName]) {
                         _this.all = response.val()[_this.pokemonName];
                     }
                 });

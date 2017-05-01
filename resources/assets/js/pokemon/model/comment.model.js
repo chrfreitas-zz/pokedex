@@ -5,6 +5,8 @@
     class CommentModel {
 
         constructor() {
+            this.all = [];
+
             this.get();
         }
 
@@ -29,9 +31,7 @@
 
             db.once('value').then((response) => {
 
-                this.all = [];
-
-                if(response.val()){
+                if(response.val() && response.val()[this.pokemonName]){
                     this.all = response.val()[this.pokemonName];
                 }
 
