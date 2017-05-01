@@ -157,6 +157,84 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
     var scope = {};
 
+    var CommentController = function () {
+        function CommentController($routeParams, CommentModel) {
+            _classCallCheck(this, CommentController);
+
+            scope = this;
+
+            /**
+            * Services
+            */
+            scope.$routeParams = $routeParams;
+            scope.CommentModel = CommentModel;
+
+            /**
+            * Properties
+            */
+            scope.comment = {
+                new: '',
+                all: []
+            };
+        }
+
+        /**
+        * Initialize CommentController
+        */
+
+
+        _createClass(CommentController, [{
+            key: 'init',
+            value: function init() {
+
+                scope.comment = scope.CommentModel;
+                scope.comment.setData(scope.$routeParams.id);
+
+                scope.comment.get().then(function (response) {
+                    scope.comment.all = response || [];
+                });
+
+                return true;
+            }
+        }, {
+            key: 'send',
+            value: function send() {
+
+                scope.comment.all.push({
+                    user: scope.comment.new.user,
+                    text: scope.comment.new.text
+                });
+
+                scope.comment.all = JSON.parse(angular.toJson(scope.comment.all));
+
+                scope.comment.save(scope.comment.all);
+
+                scope.clearForm();
+            }
+        }, {
+            key: 'clearForm',
+            value: function clearForm() {
+                scope.comment.new = {};
+            }
+        }]);
+
+        return CommentController;
+    }();
+
+    angular.module('app').controller('CommentController', CommentController);
+})(window.angular);
+'use strict';
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+(function (angular) {
+
+    'use strict';
+
+    var scope = {};
+
     var PokemonController = function () {
         function PokemonController($pokedex, $routeParams, CommentModel, PokemonModel) {
             _classCallCheck(this, PokemonController);
@@ -169,13 +247,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             scope.$pokedex = $pokedex;
             scope.$routeParams = $routeParams;
             scope.PokemonModel = PokemonModel;
-            scope.CommentModel = CommentModel;
 
             /**
             * Properties
             */
             scope.pokemon = {};
-            scope.comment = {};
         }
 
         /**
@@ -190,29 +266,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                 scope.$pokedex.get('pokemon', scope.$routeParams.id).then(function (response) {
                     scope.pokemon = scope.PokemonModel;
                     scope.pokemon.setData(response);
-
-                    scope.comment = scope.CommentModel;
-                    scope.comment.setData(scope.pokemon);
-
-                    scope.comment.get().then(function (response) {
-                        scope.comment.all = response;
-                    });
                 });
 
                 return true;
-            }
-        }, {
-            key: 'sendComment',
-            value: function sendComment() {
-                scope.pokemon.comment.save(scope.comment.user, scope.comment.text);
-
-                scope.clearFormComments();
-            }
-        }, {
-            key: 'clearFormComments',
-            value: function clearFormComments() {
-                scope.comment.user = '';
-                scope.comment.text = '';
             }
         }]);
 
@@ -248,20 +304,14 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
         _createClass(CommentModel, [{
             key: 'setData',
-            value: function setData(params) {
-                this.pokemon = params.name;
+            value: function setData(pokemon) {
+                this.pokemon = pokemon;
             }
         }, {
             key: 'save',
-            value: function save(user, text, old) {
+            value: function save(list) {
                 var db = firebase.database().ref(this.pokemon);
-
-                old.push({
-                    user: user,
-                    text: text
-                });
-
-                db.set(old);
+                db.set(list);
             }
         }, {
             key: 'get',

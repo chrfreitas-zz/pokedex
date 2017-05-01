@@ -3,21 +3,23 @@
     <div ng-bind="pokemonCtrl.pokemon.name">
     </div>
 
-    <div>
-        <form ng-submit="pokemonCtrl.sendComment(pokemonCtrl.pokemon.name)">
-            <input ng-model="pokemonCtrl.comment.user" type="text" placeholder="name">
-            <textarea ng-model="pokemonCtrl.comment.text" name="name" rows="8" cols="40"></textarea>
+    <div ng-controller="CommentController as commentCtrl" ng-init="commentCtrl.init()">
+        <form ng-submit="commentCtrl.send()">
+            <input ng-model="commentCtrl.comment.new.user" type="text" placeholder="name">
+            <textarea ng-model="commentCtrl.comment.new.text" name="name" rows="8" cols="40"></textarea>
             <button type="submit" name="button">Comment</button>
         </form>
+
+        <div>
+            <ul>
+                <li ng-repeat="comment in commentCtrl.comment.all">
+                    <span ng-bind="comment.user"></span>
+                    <span ng-bind="comment.text"></span>
+                </li>
+            </ul>
+        </div>
     </div>
 
-    <div>
-        <ul>
-            <li ng-repeat="comment in pokemonCtrl.comment.all">
-                <span ng-bind="comment.user"></span>
-                <span ng-bind="comment.text"></span>
-            </li>
-        </ul>
-    </div>
+
 
 </div>

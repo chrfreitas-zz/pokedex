@@ -19,19 +19,13 @@
 
         }
 
-        setData(params){
-            this.pokemon = params.name;
+        setData(pokemon){
+            this.pokemon = pokemon;
         }
 
-        save(user, text, old){
+        save(list){
             let db = firebase.database().ref(this.pokemon);
-
-            old.push({
-                user,
-                text
-            });
-
-            db.set(old);
+            db.set(list);
         }
 
         get() {
