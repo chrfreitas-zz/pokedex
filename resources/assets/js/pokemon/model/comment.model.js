@@ -28,7 +28,13 @@
             let db = firebase.database().ref(this.pokemonName);
 
             db.once('value').then((response) => {
-                this.all = response.val() || [];
+
+                this.all = [];
+
+                if(response.val()){
+                    this.all = response.val()[this.pokemonName];
+                }
+
             });
         }
 

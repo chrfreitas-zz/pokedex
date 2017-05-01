@@ -34,8 +34,12 @@
             return true;
         }
 
-        sendComment(){            
+        sendComment(){
+            debugger;
             this.pokemon.comment.save(this.comment.user, this.comment.text);
+
+            this.comment.user = '';
+            this.comment.text = '';
         }
 
     }

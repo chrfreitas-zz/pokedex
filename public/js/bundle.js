@@ -194,7 +194,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         }, {
             key: 'sendComment',
             value: function sendComment() {
+                debugger;
                 this.pokemon.comment.save(this.comment.user, this.comment.text);
+
+                this.comment.user = '';
+                this.comment.text = '';
             }
         }]);
 
@@ -246,7 +250,12 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                 var db = firebase.database().ref(this.pokemonName);
 
                 db.once('value').then(function (response) {
-                    _this.all = response.val() || [];
+
+                    _this.all = [];
+
+                    if (response.val()) {
+                        _this.all = response.val()[_this.pokemonName];
+                    }
                 });
             }
         }], [{
