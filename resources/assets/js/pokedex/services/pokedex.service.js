@@ -5,9 +5,8 @@
     /**
     * Constants of the service
     */
-    const URL_API = 'http://pokeapi.co/api/v2/',
+    const URL_API = 'https://pokeapi.co/api/v2/',
           DEFAULT_ROUTE = 'pokemon';
-
 
     class PokedexService {
 

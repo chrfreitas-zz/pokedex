@@ -4,16 +4,24 @@
 
     class PokemonModel {
 
-        constructor(params) {
-            this.name = params.name;
+        constructor(CommentModel) {
+            this.CommentModel = CommentModel;
         }
 
-        static instance(){
-            return PokemonModel;
+        setData(params = {}){
+            this.name = params.name;
+
+            this.comment = new this.CommentModel();
+            this.comment.setData(this);
         }
+
+        static create(CommentModel){
+            return new PokemonModel(CommentModel);
+        }
+
 
     }
 
-    angular.module('app').factory('PokemonModel', PokemonModel.instance);
+    angular.module('app').factory('PokemonModel', PokemonModel.create);
 
 })(window.angular);

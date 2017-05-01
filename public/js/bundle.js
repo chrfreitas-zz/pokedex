@@ -79,7 +79,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     * Constants of the service
     */
 
-    var URL_API = 'http://pokeapi.co/api/v2/',
+    var URL_API = 'https://pokeapi.co/api/v2/',
         DEFAULT_ROUTE = 'pokemon';
 
     var PokedexService = function () {
@@ -155,70 +155,23 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
     'use strict';
 
-    var CommentController = function () {
-        function CommentController(CommentModel) {
-            _classCallCheck(this, CommentController);
-
-            /**
-            *   Services
-            */
-            this.CommentModel = CommentModel;
-
-            /**
-            *   Properties
-            */
-            this.user = '';
-            this.text = '';
-        }
-
-        /**
-        * Save the comment
-        */
-
-
-        _createClass(CommentController, [{
-            key: 'send',
-            value: function send(name) {
-
-                var comment = new this.CommentModel({
-                    user: this.user,
-                    text: this.text
-                });
-
-                comment.save(name);
-            }
-        }]);
-
-        return CommentController;
-    }();
-
-    angular.module('app').controller('CommentController', CommentController);
-})(window.angular);
-'use strict';
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-(function (angular) {
-
-    'use strict';
-
     var PokemonController = function () {
-        function PokemonController($pokedex, PokemonModel, $routeParams) {
+        function PokemonController($pokedex, $routeParams, CommentModel, PokemonModel) {
             _classCallCheck(this, PokemonController);
 
             /**
             * Services
             */
             this.$pokedex = $pokedex;
+            this.$routeParams = $routeParams;
             this.PokemonModel = PokemonModel;
+            this.CommentModel = CommentModel;
 
             /**
             * Properties
             */
             this.pokemon = {};
-            this.routeId = $routeParams.id;
+            this.comment = {};
         }
 
         /**
@@ -231,11 +184,17 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             value: function init() {
                 var _this = this;
 
-                this.$pokedex.get('pokemon', this.routeId).then(function (response) {
-                    _this.pokemon = new _this.PokemonModel(response);
+                this.$pokedex.get('pokemon', this.$routeParams.id).then(function (response) {
+                    _this.pokemon = _this.PokemonModel;
+                    _this.pokemon.setData(response);
                 });
 
                 return true;
+            }
+        }, {
+            key: 'sendComment',
+            value: function sendComment() {
+                this.pokemon.comment.save(this.comment.user, this.comment.text);
             }
         }]);
 
@@ -255,25 +214,39 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     'use strict';
 
     var CommentModel = function () {
-        function CommentModel(params) {
+        function CommentModel() {
             _classCallCheck(this, CommentModel);
 
-            this.user = params.user;
-            this.text = params.text;
+            this.get();
         }
 
         _createClass(CommentModel, [{
+            key: 'setData',
+            value: function setData(params) {
+                this.pokemonName = params.name;
+            }
+        }, {
             key: 'save',
-            value: function save(name) {
-                var d = firebase.database().ref(name);
+            value: function save(user, text) {
 
-                d.set({
-                    user: this.user,
-                    text: this.text
+                var db = firebase.database().ref(this.pokemonName);
+
+                this.all.push({
+                    user: user,
+                    text: text
                 });
 
-                d.on('value', function (snap) {
-                    console.log(snap);
+                db.set(this.all);
+            }
+        }, {
+            key: 'get',
+            value: function get() {
+                var _this = this;
+
+                var db = firebase.database().ref(this.pokemonName);
+
+                db.once('value').then(function (response) {
+                    _this.all = response.val() || [];
                 });
             }
         }], [{
@@ -299,22 +272,32 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     'use strict';
 
     var PokemonModel = function () {
-        function PokemonModel(params) {
+        function PokemonModel(CommentModel) {
             _classCallCheck(this, PokemonModel);
 
-            this.name = params.name;
+            this.CommentModel = CommentModel;
         }
 
-        _createClass(PokemonModel, null, [{
-            key: 'instance',
-            value: function instance() {
-                return PokemonModel;
+        _createClass(PokemonModel, [{
+            key: 'setData',
+            value: function setData() {
+                var params = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+                this.name = params.name;
+
+                this.comment = new this.CommentModel();
+                this.comment.setData(this);
+            }
+        }], [{
+            key: 'create',
+            value: function create(CommentModel) {
+                return new PokemonModel(CommentModel);
             }
         }]);
 
         return PokemonModel;
     }();
 
-    angular.module('app').factory('PokemonModel', PokemonModel.instance);
+    angular.module('app').factory('PokemonModel', PokemonModel.create);
 })(window.angular);
 //# sourceMappingURL=bundle.js.map

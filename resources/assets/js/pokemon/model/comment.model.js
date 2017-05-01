@@ -4,24 +4,34 @@
 
     class CommentModel {
 
-        constructor(params) {
-            this.user = params.user;
-            this.text = params.text;
+        constructor() {
+            this.get();
         }
 
-        save(name){
-            var d = firebase.database().ref(name);
-
-            d.set({
-                user: this.user,
-                text: this.text
-            });
-
-            d.on('value', function(snap) {
-                console.log(snap);
-            });
-
+        setData(params){
+            this.pokemonName = params.name;
         }
+
+        save(user, text){
+
+            let db = firebase.database().ref(this.pokemonName);
+
+            this.all.push({
+                user,
+                text
+            });
+
+            db.set(this.all);
+        }
+
+        get() {
+            let db = firebase.database().ref(this.pokemonName);
+
+            db.once('value').then((response) => {
+                this.all = response.val() || [];
+            });
+        }
+
 
         static instance(){
             return CommentModel;

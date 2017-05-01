@@ -2,23 +2,23 @@
 
     'use strict';
 
-
     class PokemonController {
 
-        constructor($pokedex, PokemonModel, $routeParams){
+        constructor($pokedex, $routeParams, CommentModel, PokemonModel){
 
             /**
             * Services
             */
             this.$pokedex = $pokedex;
+            this.$routeParams = $routeParams;
             this.PokemonModel = PokemonModel;
+            this.CommentModel = CommentModel;
 
             /**
             * Properties
             */
             this.pokemon = {};
-            this.routeId = $routeParams.id;
-
+            this.comment = {};
         }
 
         /**
@@ -26,14 +26,17 @@
         */
          init(){
 
-            this.$pokedex.get('pokemon', this.routeId).then((response) => {
-                this.pokemon = new this.PokemonModel(response);
+            this.$pokedex.get('pokemon', this.$routeParams.id).then((response) => {
+                this.pokemon = this.PokemonModel;
+                this.pokemon.setData(response);
             });
-
 
             return true;
         }
 
+        sendComment(){            
+            this.pokemon.comment.save(this.comment.user, this.comment.text);
+        }
 
     }
 
