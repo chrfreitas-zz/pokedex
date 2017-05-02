@@ -1,7 +1,7 @@
 <div class="pokedex" ng-controller="PokedexController as pokedexCtrl" ng-init="pokedexCtrl.init()">
     <ul class="tiles">
         <li class="tiles__item" ng-repeat="pokemon in pokedexCtrl.items">
-            <a ng-href="/pokemon/{{pokemon.name}}">
+            <a class="tiles__container" ng-href="/pokemon/{{pokemon.name}}">
 
                 <div class="tiles__thumb">
                     <img ng-src="../../img/pokemons/{{$index + 1}}.png" alt="">
