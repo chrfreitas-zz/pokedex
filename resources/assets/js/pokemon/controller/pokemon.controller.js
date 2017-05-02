@@ -28,7 +28,7 @@
         */
          init(){
 
-            scope.$pokedex.get('pokemon', scope.$routeParams.id).then((response) => {
+            scope.$pokedex.get('pokemon', scope.$routeParams.id).then((response) => {                
                 scope.pokemon = scope.PokemonModel;
                 scope.pokemon.setData(response);
             });

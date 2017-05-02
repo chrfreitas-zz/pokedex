@@ -1,12 +1,17 @@
-<div ng-controller="PokedexController as pokedexCtrl" ng-init="pokedexCtrl.init()">
-    <ul>
-        <li ng-repeat="pokemon in pokedexCtrl.items">
-            <div ng-bind="pokemon.name">
-            </div>
+<div class="pokedex" ng-controller="PokedexController as pokedexCtrl" ng-init="pokedexCtrl.init()">
+    <ul class="tiles">
+        <li class="tiles__item" ng-repeat="pokemon in pokedexCtrl.items">
             <a ng-href="/pokemon/{{pokemon.name}}">
-                Detalhes
+
+                <div class="tiles__thumb">
+                    <img ng-src="../../img/pokemons/{{$index + 1}}.png" alt="">
+                </div>
+
+                <p class="tiles__title">
+                     {{ pokemon.name }}
+                </p>
+
             </a>
         </li>
     </ul>
-
 </div>

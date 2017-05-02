@@ -2,19 +2,23 @@
 
     'use strict';
 
+    var scope = {};
+
     class PokedexController {
 
         constructor($pokedex){
 
+            scope = this;
+
             /**
             * Services
             */
-            this.$pokedex = $pokedex;
+            scope.$pokedex = $pokedex;
 
             /**
             * Properties
             */
-            this.items = [];
+            scope.items = [];
         }
 
         /**
@@ -22,8 +26,8 @@
         */
         init(){
 
-            this.$pokedex.get('pokemon').then((response) => {
-                this.items = response;
+            scope.$pokedex.get('pokemon').then((response) => {
+                scope.items = response;
             });
 
             return true;

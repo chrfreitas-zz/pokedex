@@ -40,6 +40,9 @@
             return true;
         }
 
+        /**
+        * Add new comment in the list and save de list
+        */
         send(){
 
             scope.comment.all.push({
@@ -54,6 +57,9 @@
             scope.clearForm();
         }
 
+        /**
+        * Just clear the form for new comment.
+        */
         clearForm(){
             scope.comment.new = {};
         }

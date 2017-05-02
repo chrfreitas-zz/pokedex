@@ -27,19 +27,23 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
     'use strict';
 
+    var scope = {};
+
     var PokedexController = function () {
         function PokedexController($pokedex) {
             _classCallCheck(this, PokedexController);
 
+            scope = this;
+
             /**
             * Services
             */
-            this.$pokedex = $pokedex;
+            scope.$pokedex = $pokedex;
 
             /**
             * Properties
             */
-            this.items = [];
+            scope.items = [];
         }
 
         /**
@@ -50,10 +54,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         _createClass(PokedexController, [{
             key: 'init',
             value: function init() {
-                var _this = this;
 
-                this.$pokedex.get('pokemon').then(function (response) {
-                    _this.items = response;
+                scope.$pokedex.get('pokemon').then(function (response) {
+                    scope.items = response;
                 });
 
                 return true;
@@ -196,6 +199,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
                 return true;
             }
+
+            /**
+            * Add new comment in the list and save de list
+            */
+
         }, {
             key: 'send',
             value: function send() {
@@ -211,6 +219,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
                 scope.clearForm();
             }
+
+            /**
+            * Just clear the form for new comment.
+            */
+
         }, {
             key: 'clearForm',
             value: function clearForm() {

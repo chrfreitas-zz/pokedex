@@ -45,7 +45,7 @@ gulp.task('less:bundle', () => {
 
     gulp.start('less:clean');
 
-    gulp.src('resources/assets/less/**/*.less')
+    gulp.src('resources/assets/less/main.less')
         .pipe(less())
         .pipe(autoprefixer())
         .pipe(concat('style.css'))
