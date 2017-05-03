@@ -20,17 +20,24 @@
             </div>
 
             <div class="pokemon__caracteristics">
-                <div class="pokemon__abilities">
-                    <b>Abilities:</b>
-                    <ul class="pokemon__abilities_items">
+                <div class="pokemon__caracteristics__item">
+                    <div class="pokemon__abilities__title">
+                        Abilities:
+                    </div>
+                    <ul class="pokemon__abilities__item">
                         <li ng-repeat="abilities in pokemonCtrl.pokemon.abilities">
                             {{ abilities.ability.name }}
                         </li>
                     </ul>
                 </div>
 
-                <div class="pokemon__experience">
-                    <b>Experience:</b> {{ pokemonCtrl.pokemon.experience }}
+                <div class="pokemon__caracteristics__item">
+                    <div class="pokemon__abilities__title">
+                        Experience:
+                    </div>
+                    <div class="pokemon__abilities__item">
+                        {{ pokemonCtrl.pokemon.experience }}
+                    </div>
                 </div>
             </div>
 
@@ -39,7 +46,7 @@
         <!-- Comments -->
         <div class="pokemon__comments" ng-controller="CommentController as commentCtrl" ng-init="commentCtrl.init()">
             <div class="pokemon__comments_title">
-                Comments:                
+                Comments:
             </div>
 
             <!-- Comments list -->

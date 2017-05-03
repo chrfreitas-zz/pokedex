@@ -1,7 +1,12 @@
 
 .pokemon__caracteristics
 {
-    b
+    .pokemon__caracteristics__item + .pokemon__caracteristics__item
+    {
+        margin: 20px 0 0 0;
+    }
+
+    .pokemon__abilities__title
     {
         font-weight: bold;
         margin: 0 0 10px 0;
@@ -9,23 +14,20 @@
         color: @red;
     }
 
-    .pokemon__abilities_items
+    .pokemon__abilities__item
     {
+        display: flex;
+        flex-wrap: wrap;
         margin: 0 0 0 15px;
-    }
+        padding: 5px;
 
-    .pokemon__abilities_items li
-    {
-        padding: 5px;;
-    }
+        li
+        {
+            padding: 5px 10px 5px 0;
+        }
 
-    .pokemon__experience
-    {
-        margin: 20px 0 0 0;
     }
 }
-
-
 
 @media @desktop
 {
