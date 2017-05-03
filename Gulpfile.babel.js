@@ -8,6 +8,8 @@ import karma from 'karma';
 import jshint from 'gulp-jshint';
 import autoprefixer from 'gulp-autoprefixer';
 import sourcemaps from 'gulp-sourcemaps';
+import jsmin from 'gulp-jsmin';
+import uglifycss from 'gulp-uglifycss';
 
 gulp.task('js:bundle', () => {
 
@@ -18,7 +20,8 @@ gulp.task('js:bundle', () => {
         .pipe(sourcemaps.init())
         .pipe(jshint.reporter('default'))
         .pipe(babel({ presets: ['es2015'] }))
-        .pipe(concat('bundle.js'))
+        .pipe(concat('bundle.min.js'))
+        .pipe(jsmin())
         .pipe(sourcemaps.write('.'))
         .pipe(gulp.dest('public/js/'));
 });
@@ -48,7 +51,8 @@ gulp.task('less:bundle', () => {
     gulp.src('resources/assets/less/main.less')
         .pipe(less())
         .pipe(autoprefixer())
-        .pipe(concat('style.css'))
+        .pipe(concat('style.min.css'))
+        .pipe(uglifycss())
         .pipe(gulp.dest('public/css/'));
 });
 
