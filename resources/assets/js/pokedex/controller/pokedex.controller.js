@@ -27,7 +27,7 @@
         */
         init(){
 
-            scope.$pokedex.get('pokemon').then((response) => {
+            scope.$pokedex.get('pokemon/?limit=151&offset=0').then((response) => {
                 scope.items = response;
                 scope.loading = false;
             });

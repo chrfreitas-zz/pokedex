@@ -80,7 +80,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             key: 'init',
             value: function init() {
 
-                scope.$pokedex.get('pokemon').then(function (response) {
+                scope.$pokedex.get('pokemon/?limit=151&offset=0').then(function (response) {
                     scope.items = response;
                     scope.loading = false;
                 });
