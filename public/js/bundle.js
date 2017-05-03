@@ -19,6 +19,83 @@
 })(window.angular);
 'use strict';
 
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+(function (angular) {
+
+    'use strict';
+
+    var scope = {};
+
+    var Loading = function Loading() {
+        _classCallCheck(this, Loading);
+
+        scope = this;
+
+        scope.template = '<svg version="1.1" id="loader-1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="40px" height="40px" viewBox="0 0 50 50" style="enable-background:new 0 0 50 50;" xml:space="preserve">\n                                <path fill="#fff" d="M43.935,25.145c0-10.318-8.364-18.683-18.683-18.683c-10.318,0-18.683,8.365-18.683,18.683h4.068c0-8.071,6.543-14.615,14.615-14.615c8.072,0,14.615,6.543,14.615,14.615H43.935z" transform="rotate(280 25 25)">\n                                    <animateTransform attributeType="xml" attributeName="transform" type="rotate" from="0 25 25" to="360 25 25" dur="0.6s" repeatCount="indefinite"></animateTransform>\n                                </path>\n                            </svg>';
+
+        scope.restrict = 'A';
+    };
+
+    angular.module('app').directive('loading', function () {
+        return new Loading();
+    });
+})(window.angular);
+'use strict';
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+(function (angular) {
+
+    'use strict';
+
+    var scope = {};
+
+    var PokedexController = function () {
+        function PokedexController($pokedex) {
+            _classCallCheck(this, PokedexController);
+
+            scope = this;
+
+            /**
+            * Services
+            */
+            scope.$pokedex = $pokedex;
+
+            /**
+            * Properties
+            */
+            scope.items = [];
+            scope.loading = true;
+        }
+
+        /**
+        * Initialize PokedexController
+        */
+
+
+        _createClass(PokedexController, [{
+            key: 'init',
+            value: function init() {
+
+                scope.$pokedex.get('pokemon').then(function (response) {
+                    scope.items = response;
+                    scope.loading = false;
+                });
+
+                return true;
+            }
+        }]);
+
+        return PokedexController;
+    }();
+
+    angular.module('app').controller('PokedexController', PokedexController);
+})(window.angular);
+'use strict';
+
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -96,59 +173,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     }();
 
     angular.module('app').service('$pokedex', PokedexService);
-})(window.angular);
-'use strict';
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-(function (angular) {
-
-    'use strict';
-
-    var scope = {};
-
-    var PokedexController = function () {
-        function PokedexController($pokedex) {
-            _classCallCheck(this, PokedexController);
-
-            scope = this;
-
-            /**
-            * Services
-            */
-            scope.$pokedex = $pokedex;
-
-            /**
-            * Properties
-            */
-            scope.items = [];
-            scope.loading = true;
-        }
-
-        /**
-        * Initialize PokedexController
-        */
-
-
-        _createClass(PokedexController, [{
-            key: 'init',
-            value: function init() {
-
-                scope.$pokedex.get('pokemon').then(function (response) {
-                    scope.items = response;
-                    scope.loading = false;
-                });
-
-                return true;
-            }
-        }]);
-
-        return PokedexController;
-    }();
-
-    angular.module('app').controller('PokedexController', PokedexController);
 })(window.angular);
 'use strict';
 
