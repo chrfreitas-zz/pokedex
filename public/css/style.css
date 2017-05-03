@@ -135,6 +135,7 @@ html,
 body {
   height: 100vh;
   width: 100vw;
+  font-family: 'Roboto';
 }
 body {
   background: linear-gradient(45deg, #ad0404, #7b0303);
@@ -219,15 +220,19 @@ body {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  margin: 0 0 20px 0;
+  margin: 0 0 40px 0;
 }
 .pokemon .pokemon__info .pokemon__card .pokemon__name {
   text-transform: capitalize;
+  font-family: 'Wendy One';
+  font-size: 25px;
+  color: #ad0404;
 }
 .pokemon .pokemon__info .pokemon__caracteristics b {
   font-weight: bold;
   margin: 0 0 10px 0;
   display: block;
+  color: #ad0404;
 }
 .pokemon .pokemon__info .pokemon__caracteristics .pokemon__abilities_items {
   margin: 0 0 0 15px;
@@ -236,13 +241,16 @@ body {
   padding: 5px;
 }
 .pokemon .pokemon__info .pokemon__caracteristics .pokemon__experience {
-  margin: 10px 0 0 0;
+  margin: 20px 0 0 0;
 }
 .pokemon .pokemon__comments {
   margin: 20px 0 0 0;
 }
 .pokemon .pokemon__comments .pokemon__comments_title {
-  text-align: center;
+  font-weight: bold;
+  margin: 0 0 10px 0;
+  display: block;
+  color: #ad0404;
 }
 .pokemon .pokemon__comments .pokemon__comments__list .pokemon__comments__item {
   padding: 10px 0;
@@ -256,8 +264,17 @@ body {
 }
 .pokemon .pokemon__comments .pokemon__comments__form {
   width: 100%;
+  margin: 35px 0 0 0;
 }
 .pokemon .pokemon__comments .pokemon__comments__form .pokemon__comments__name,
 .pokemon .pokemon__comments .pokemon__comments__form .pokemon__comments__text {
   width: 100%;
+}
+.pokemon .pokemon__comments .pokemon__comments__form .pokemon__comments__name {
+  margin: 10px 0;
+  height: 30px;
+}
+.pokemon .pokemon__comments .pokemon__comments__without {
+  margin: 10px 0;
+  text-align: center;
 }

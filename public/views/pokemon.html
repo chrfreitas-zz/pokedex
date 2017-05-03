@@ -32,10 +32,10 @@
     <div class="pokemon__comments" ng-controller="CommentController as commentCtrl" ng-init="commentCtrl.init()">
 
         <div class="pokemon__comments_title">
-            Comments
+            Comments:
         </div>
 
-        <ul class="pokemon__comments__list">
+        <ul class="pokemon__comments__list" ng-if="commentCtrl.comment.all.length">
             <li class="pokemon__comments__item" ng-repeat="comment in commentCtrl.comment.all">
                 <div class="pokemon__comments__text">
                     {{comment.text}}
@@ -45,6 +45,10 @@
                 </div>
             </li>
         </ul>
+
+        <div class="pokemon__comments__without" ng-if="!commentCtrl.comment.all.length">
+            There isn't comments :(
+        </div>
 
         <form class="pokemon__comments__form" ng-submit="commentCtrl.send()">
             <input class="pokemon__comments__name" ng-model="commentCtrl.comment.new.user" type="text" placeholder="name">

@@ -9,11 +9,14 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-        margin: 0 0 20px 0;
+        margin: 0 0 40px 0;
 
         .pokemon__name
         {
             text-transform: capitalize;
+            font-family: 'Wendy One';
+            font-size: 25px;
+            color: @red;
         }
     }
 
@@ -24,6 +27,7 @@
             font-weight: bold;
             margin: 0 0 10px 0;
             display: block;
+            color: @red;
         }
 
         .pokemon__abilities_items
@@ -38,7 +42,7 @@
 
         .pokemon__experience
         {
-            margin: 10px 0 0 0;
+            margin: 20px 0 0 0;
         }
     }
 
@@ -49,7 +53,10 @@
 
          .pokemon__comments_title
          {
-             text-align: center;
+             font-weight: bold;
+             margin: 0 0 10px 0;
+             display: block;
+             color: @red;
          }
 
          .pokemon__comments__list .pokemon__comments__item
@@ -71,12 +78,25 @@
          .pokemon__comments__form
          {
              width: 100%;
+             margin: 35px 0 0 0;
 
              .pokemon__comments__name, .pokemon__comments__text
              {
                  width: 100%;
              }
 
+            .pokemon__comments__name
+            {
+                margin: 10px 0;
+                height: 30px;
+            }
+
+         }
+
+         .pokemon__comments__without
+         {
+             margin: 10px 0;
+             text-align: center;
          }
     }
 
