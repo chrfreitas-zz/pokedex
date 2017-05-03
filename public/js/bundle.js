@@ -265,6 +265,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             * Properties
             */
             scope.pokemon = {};
+            scope.loading = true;
         }
 
         /**
@@ -279,6 +280,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                 scope.$pokedex.get('pokemon', scope.$routeParams.id).then(function (response) {
                     scope.pokemon = scope.PokemonModel;
                     scope.pokemon.setData(response);
+                    scope.loading = false;
                 });
 
                 return true;
