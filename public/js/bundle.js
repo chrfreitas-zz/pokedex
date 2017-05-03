@@ -205,6 +205,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                 new: '',
                 all: []
             };
+
+            scope.showForm = false;
         }
 
         /**
@@ -254,6 +256,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             key: 'clearForm',
             value: function clearForm() {
                 scope.comment.new = {};
+            }
+        }, {
+            key: 'toogleForm',
+            value: function toogleForm() {
+                scope.showForm = !scope.showForm;
             }
         }]);
 

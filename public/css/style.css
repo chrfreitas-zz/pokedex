@@ -131,6 +131,29 @@ a:hover,
 a:focus {
   text-decoration: none;
 }
+button {
+  background: none;
+  border: 1px solid gray;
+  color: gray;
+  border-radius: 5px;
+  padding: 5px 15px;
+}
+form {
+  width: 100%;
+}
+form input {
+  width: 100%;
+  height: 30px;
+  margin: 0 0 10px 0;
+  display: inline-block;
+  border: none;
+  border-bottom: 1px solid gray;
+  margin: 5px 0;
+  padding: 0 5px;
+}
+* {
+  box-sizing: border-box;
+}
 html,
 body {
   width: 100%;
@@ -152,9 +175,41 @@ body {
           align-items: center;
   margin: 20px auto;
 }
+.pokemon {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 100%;
+}
+.pokemon .pokemon__container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  background-color: #fff;
+  border-radius: 5px;
+  padding: 20px;
+  width: 100%;
+}
 @media (min-width: 992px) {
   .main {
     width: 900px;
+  }
+  .pokemon .pokemon__container {
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
   }
 }
 .tiles {
@@ -203,31 +258,7 @@ body {
   color: #046484;
   transition: color 0.2s ease-in-out;
 }
-.pokemon {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-}
-.pokemon .pokemon__container {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  background-color: #fff;
-  border-radius: 5px;
-  padding: 20px;
-}
-.pokemon .pokemon__info .pokemon__card {
+.pokemon__info .pokemon__card {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -240,77 +271,57 @@ body {
           align-items: center;
   margin: 0 0 40px 0;
 }
-.pokemon .pokemon__info .pokemon__card .pokemon__name {
+.pokemon__info .pokemon__card .pokemon__name {
   text-transform: capitalize;
   font-family: 'Wendy One';
   font-size: 25px;
   color: #ad0404;
 }
-.pokemon .pokemon__info .pokemon__caracteristics b {
+.pokemon__comments {
+  margin: 20px 0 0 0;
+}
+.pokemon__comments .pokemon__comments_title {
   font-weight: bold;
   margin: 0 0 10px 0;
   display: block;
   color: #ad0404;
 }
-.pokemon .pokemon__info .pokemon__caracteristics .pokemon__abilities_items {
-  margin: 0 0 0 15px;
-}
-.pokemon .pokemon__info .pokemon__caracteristics .pokemon__abilities_items li {
-  padding: 5px;
-}
-.pokemon .pokemon__info .pokemon__caracteristics .pokemon__experience {
-  margin: 20px 0 0 0;
-}
-.pokemon .pokemon__comments {
-  margin: 20px 0 0 0;
-}
-.pokemon .pokemon__comments .pokemon__comments_title {
-  font-weight: bold;
-  margin: 0 0 10px 0;
-  display: block;
-  color: #ad0404;
-}
-.pokemon .pokemon__comments .pokemon__comments__list .pokemon__comments__item {
+.pokemon__comments .pokemon__comments__list .pokemon__comments__item {
   padding: 10px 0;
 }
-.pokemon .pokemon__comments .pokemon__comments__list .pokemon__comments__user,
-.pokemon .pokemon__comments .pokemon__comments__list .pokemon__comments__text {
-  text-align: right;
-}
-.pokemon .pokemon__comments .pokemon__comments__list .pokemon__comments__user {
+.pokemon__comments .pokemon__comments__list .pokemon__comments__user {
   font-style: italic;
 }
-.pokemon .pokemon__comments .pokemon__comments__form {
-  width: 100%;
-  margin: 35px 0 0 0;
-}
-.pokemon .pokemon__comments .pokemon__comments__form .pokemon__comments__name,
-.pokemon .pokemon__comments .pokemon__comments__form .pokemon__comments__text {
-  width: 100%;
-}
-.pokemon .pokemon__comments .pokemon__comments__form .pokemon__comments__name {
-  margin: 10px 0;
-  height: 30px;
-}
-.pokemon .pokemon__comments .pokemon__comments__without {
+.pokemon__comments .pokemon__comments__without {
   margin: 10px 0;
   text-align: center;
 }
 @media (min-width: 992px) {
-  .pokemon .pokemon__container {
-    -webkit-box-orient: horizontal;
-    -webkit-box-direction: normal;
-        -ms-flex-direction: row;
-            flex-direction: row;
-  }
-  .pokemon .pokemon__container .pokemon__info {
-    -webkit-box-flex: 1;
-        -ms-flex: 1;
-            flex: 1;
-  }
-  .pokemon .pokemon__container .pokemon__comments {
+  .pokemon__comments {
     -webkit-box-flex: 2;
         -ms-flex: 2;
             flex: 2;
+  }
+}
+.pokemon__caracteristics b {
+  font-weight: bold;
+  margin: 0 0 10px 0;
+  display: block;
+  color: #ad0404;
+}
+.pokemon__caracteristics .pokemon__abilities_items {
+  margin: 0 0 0 15px;
+}
+.pokemon__caracteristics .pokemon__abilities_items li {
+  padding: 5px;
+}
+.pokemon__caracteristics .pokemon__experience {
+  margin: 20px 0 0 0;
+}
+@media (min-width: 992px) {
+  .pokemon__info {
+    -webkit-box-flex: 1;
+        -ms-flex: 1;
+            flex: 1;
   }
 }

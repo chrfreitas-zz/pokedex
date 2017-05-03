@@ -23,6 +23,8 @@
                 new: '',
                 all: []
             };
+
+            scope.showForm = false;
         }
 
         /**
@@ -62,6 +64,10 @@
         */
         clearForm(){
             scope.comment.new = {};
+        }
+
+        toogleForm(){
+            scope.showForm = !scope.showForm;
         }
 
     }

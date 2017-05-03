@@ -1,9 +1,12 @@
 <div class="pokemon" ng-controller="PokemonController as pokemonCtrl" ng-init="pokemonCtrl.init()">
 
-    <div loading ng-if="pokemonCtrl.loading">    
+    <!-- Loading -->
+    <div loading ng-if="pokemonCtrl.loading">
     </div>
 
     <div class="pokemon__container" ng-if="!pokemonCtrl.loading">
+
+        <!-- Pokemon info -->
         <div class="pokemon__info">
 
             <div class="pokemon__card">
@@ -33,33 +36,36 @@
 
         </div>
 
+        <!-- Comments -->
         <div class="pokemon__comments" ng-controller="CommentController as commentCtrl" ng-init="commentCtrl.init()">
+            <div class="pokemon__comments_title">
+                Comments:                
+            </div>
 
-        <div class="pokemon__comments_title">
-            Comments:
+            <!-- Comments list -->
+            <ul class="pokemon__comments__list" ng-if="commentCtrl.comment.all.length">
+                <li class="pokemon__comments__item" ng-repeat="comment in commentCtrl.comment.all">
+                    <div class="pokemon__comments__text">
+                        {{comment.text}}
+                    </div>
+                    <div class="pokemon__comments__user">
+                        {{comment.user}}
+                    </div>
+                </li>
+            </ul>
+
+            <!-- Without comments -->
+            <div class="pokemon__comments__without" ng-if="!commentCtrl.comment.all.length">
+                There isn't comments :(
+            </div>
+
+            <!-- Form to comment -->
+            <!-- <form class="pokemon__comments__form" ng-submit="commentCtrl.send()">
+                <input class="pokemon__comments__input" ng-model="commentCtrl.comment.new.user" type="text" placeholder="Your name">
+                <input class="pokemon__comments__input" ng-model="commentCtrl.comment.new.text" type="text" placeholder="Your comment">
+
+                <button type="submit" name="button">Do it!</button>
+            </form> -->
         </div>
-
-        <ul class="pokemon__comments__list" ng-if="commentCtrl.comment.all.length">
-            <li class="pokemon__comments__item" ng-repeat="comment in commentCtrl.comment.all">
-                <div class="pokemon__comments__text">
-                    {{comment.text}}
-                </div>
-                <div class="pokemon__comments__user">
-                    {{comment.user}}
-                </div>
-            </li>
-        </ul>
-
-        <div class="pokemon__comments__without" ng-if="!commentCtrl.comment.all.length">
-            There isn't comments :(
-        </div>
-
-        <form class="pokemon__comments__form" ng-submit="commentCtrl.send()">
-            <input class="pokemon__comments__name" ng-model="commentCtrl.comment.new.user" type="text" placeholder="name">
-            <textarea  class="pokemon__comments__text" ng-model="commentCtrl.comment.new.text" name="name" rows="8" cols="40"></textarea>
-            <button type="submit" name="button">Do it!</button>
-        </form>
-
-    </div>
     </div>
 </div>
