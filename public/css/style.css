@@ -156,11 +156,16 @@ form input {
 }
 html,
 body {
+  height: 100%;
   width: 100%;
   font-family: 'Roboto';
 }
+html {
+  overflow: hidden;
+}
 body {
   background: linear-gradient(45deg, #ad0404, #7b0303);
+  overflow: auto;
 }
 .main {
   width: 90%;
