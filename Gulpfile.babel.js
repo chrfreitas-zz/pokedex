@@ -2,7 +2,6 @@ import gulp from 'gulp';
 import babel from 'gulp-babel';
 import concat from 'gulp-concat';
 import less from 'gulp-less';
-import pug from 'gulp-pug';
 import del from 'del';
 import karma from 'karma';
 import jshint from 'gulp-jshint';
