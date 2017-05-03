@@ -19,6 +19,7 @@
             * Properties
             */
             scope.items = [];
+            scope.loading = true;
         }
 
         /**
@@ -28,6 +29,7 @@
 
             scope.$pokedex.get('pokemon').then((response) => {
                 scope.items = response;
+                scope.loading = false;
             });
 
             return true;
