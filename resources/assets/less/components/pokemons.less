@@ -3,6 +3,8 @@
     background-color: @white;
     border-radius: 5px;
     padding: 20px;
+    display: flex;
+    flex-direction: column;
 
     .pokemon__info .pokemon__card
     {
@@ -45,7 +47,6 @@
             margin: 20px 0 0 0;
         }
     }
-
 
     .pokemon__comments
     {
@@ -98,6 +99,26 @@
              margin: 10px 0;
              text-align: center;
          }
+    }
+
+}
+
+
+@media @desktop
+{
+    .pokemon
+    {
+        flex-direction: row;
+
+        .pokemon__info
+        {
+            flex: 1;
+        }
+
+        .pokemon__comments
+        {
+            flex: 2;
+        }
     }
 
 }

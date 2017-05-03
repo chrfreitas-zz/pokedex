@@ -208,6 +208,13 @@ body {
   background-color: #fff;
   border-radius: 5px;
   padding: 20px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
 }
 .pokemon .pokemon__info .pokemon__card {
   display: -webkit-box;
@@ -277,4 +284,22 @@ body {
 .pokemon .pokemon__comments .pokemon__comments__without {
   margin: 10px 0;
   text-align: center;
+}
+@media (min-width: 992px) {
+  .pokemon {
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
+  }
+  .pokemon .pokemon__info {
+    -webkit-box-flex: 1;
+        -ms-flex: 1;
+            flex: 1;
+  }
+  .pokemon .pokemon__comments {
+    -webkit-box-flex: 2;
+        -ms-flex: 2;
+            flex: 2;
+  }
 }
