@@ -368,6 +368,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             _classCallCheck(this, PokemonModel);
 
             this.name = '';
+            this.image = '';
+            this.abilities = [];
+            this.experience = 0;
         }
 
         _createClass(PokemonModel, [{
@@ -376,6 +379,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
                 var params = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
                 this.name = params.name;
+                /*jshint camelcase: false */
+                this.image = params.sprites.front_default;
+                this.abilities = params.abilities;
+                /*jshint camelcase: false */
+                this.experience = params.base_experience;
             }
         }], [{
             key: 'create',

@@ -1,0 +1,83 @@
+.pokemon
+{
+    background-color: @white;
+    border-radius: 5px;
+    padding: 20px;
+
+    .pokemon__info .pokemon__card
+    {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin: 0 0 20px 0;
+
+        .pokemon__name
+        {
+            text-transform: capitalize;
+        }
+    }
+
+    .pokemon__info .pokemon__caracteristics
+    {
+        b
+        {
+            font-weight: bold;
+            margin: 0 0 10px 0;
+            display: block;
+        }
+
+        .pokemon__abilities_items
+        {
+            margin: 0 0 0 15px;
+        }
+
+        .pokemon__abilities_items li
+        {
+            padding: 5px;;
+        }
+
+        .pokemon__experience
+        {
+            margin: 10px 0 0 0;
+        }
+    }
+
+
+    .pokemon__comments
+    {
+         margin: 20px 0 0 0;
+
+         .pokemon__comments_title
+         {
+             text-align: center;
+         }
+
+         .pokemon__comments__list .pokemon__comments__item
+         {
+             padding: 10px 0;
+         }
+
+         .pokemon__comments__list .pokemon__comments__user,
+         .pokemon__comments__list .pokemon__comments__text
+         {
+             text-align: right;
+         }
+
+        .pokemon__comments__list .pokemon__comments__user
+         {
+             font-style: italic;
+         }
+
+         .pokemon__comments__form
+         {
+             width: 100%;
+
+             .pokemon__comments__name, .pokemon__comments__text
+             {
+                 width: 100%;
+             }
+
+         }
+    }
+
+}

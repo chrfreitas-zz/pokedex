@@ -1,25 +1,56 @@
-<div ng-controller="PokemonController as pokemonCtrl" ng-init="pokemonCtrl.init()">
+<div class="pokemon" ng-controller="PokemonController as pokemonCtrl" ng-init="pokemonCtrl.init()">
 
-    <div ng-bind="pokemonCtrl.pokemon.name">
+    <div class="pokemon__info">
+
+        <div class="pokemon__card">
+            <div class="pokemon__image">
+                <img ng-src="{{pokemonCtrl.pokemon.image}}" alt="Pokemon Image">
+            </div>
+
+            <div class="pokemon__name">
+                {{ pokemonCtrl.pokemon.name }}
+            </div>
+        </div>
+
+        <div class="pokemon__caracteristics">
+            <div class="pokemon__abilities">
+                <b>Abilities:</b>
+                <ul class="pokemon__abilities_items">
+                    <li ng-repeat="abilities in pokemonCtrl.pokemon.abilities">
+                        {{ abilities.ability.name }}
+                    </li>
+                </ul>
+            </div>
+
+            <div class="pokemon__experience">
+                <b>Experience:</b> {{ pokemonCtrl.pokemon.experience }}
+            </div>
+        </div>
+
     </div>
 
-    <div ng-controller="CommentController as commentCtrl" ng-init="commentCtrl.init()">
-        <form ng-submit="commentCtrl.send()">
-            <input ng-model="commentCtrl.comment.new.user" type="text" placeholder="name">
-            <textarea ng-model="commentCtrl.comment.new.text" name="name" rows="8" cols="40"></textarea>
-            <button type="submit" name="button">Comment</button>
+    <div class="pokemon__comments" ng-controller="CommentController as commentCtrl" ng-init="commentCtrl.init()">
+
+        <div class="pokemon__comments_title">
+            Comments
+        </div>
+
+        <ul class="pokemon__comments__list">
+            <li class="pokemon__comments__item" ng-repeat="comment in commentCtrl.comment.all">
+                <div class="pokemon__comments__text">
+                    {{comment.text}}
+                </div>
+                <div class="pokemon__comments__user">
+                    {{comment.user}}
+                </div>
+            </li>
+        </ul>
+
+        <form class="pokemon__comments__form" ng-submit="commentCtrl.send()">
+            <input class="pokemon__comments__name" ng-model="commentCtrl.comment.new.user" type="text" placeholder="name">
+            <textarea  class="pokemon__comments__text" ng-model="commentCtrl.comment.new.text" name="name" rows="8" cols="40"></textarea>
+            <button type="submit" name="button">Do it!</button>
         </form>
 
-        <div>
-            <ul>
-                <li ng-repeat="comment in commentCtrl.comment.all">
-                    <span ng-bind="comment.user"></span>
-                    <span ng-bind="comment.text"></span>
-                </li>
-            </ul>
-        </div>
     </div>
-
-
-
 </div>
