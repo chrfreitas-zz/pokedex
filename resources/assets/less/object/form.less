@@ -1,0 +1,96 @@
+.form
+{
+    &__holder
+    {
+        height: 70px;
+        overflow-x: hidden;
+        overflow-y: visible;
+        position: relative;
+    }
+
+    &__input
+    {
+        background-color: transparent;
+        border-color: @blue;
+        border-style: none none solid;
+        border-width: 0 0 1px;
+        bottom: 0;
+        box-sizing: border-box;
+        color: @black;
+        font-size: 16px;
+        padding: 10px;
+        position: absolute;
+        width: 100%;
+
+        &:focus,
+        &:valid
+        {
+            ~ .form__label
+            {
+                transition: all 0.125s ease;
+                color: @blue;
+                font-size: .75em;
+                transform: translateY(-100%);
+            }
+        }
+
+        &:focus {
+            outline: 0;
+
+            ~ .form__line
+            {
+                transition: all 0.45s ease;
+                transform: translateX(0);
+            }
+        }
+
+        ~ .form__line
+        {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            height: 3px;
+            width: 100%;
+            -webkit-transition: all 0.45s ease;
+            -moz-transition: all 0.45s ease;
+            transition: all 0.45s ease;
+            background: @blue;
+            display: block;
+            transform: translateX(-100%);
+        }
+
+    }
+
+    &__label
+    {
+        position: absolute;
+        bottom: 20px;
+        left: 0;
+        -webkit-transition: all 0.25s ease;
+        -moz-transition: all 0.25s ease;
+        transition: all 0.25s ease;
+        color: @blue;
+        pointer-events: none;
+    }
+
+    &__button
+    {
+        font-weight: bold;
+        font-size: 14px;
+        background-color: @blue;
+        width: 100%;
+        text-align: center;
+        text-transform: uppercase;
+        margin: 30px 0 0 0;
+        padding: 10px;
+        border: none;
+        color: @white;
+        cursor: pointer;
+        transition: background-color .2s linear;
+
+        &:hover
+        {
+            background-color: @dark-blue;
+        }
+    }
+}

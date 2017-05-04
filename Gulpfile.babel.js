@@ -66,7 +66,7 @@ gulp.task('less:watch', () => {
 
 });
 
-gulp.task('lib:bundle', () => {
+gulp.task('vendor:bundle', () => {
 
     gulp.src('lib/angular/angular.min.js')
         .pipe(gulp.dest('public/lib/angular'));

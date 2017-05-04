@@ -1,78 +1,117 @@
-<div class="pokemon" ng-controller="PokemonController as pokemonCtrl" ng-init="pokemonCtrl.init()">
+<div class="card" ng-controller="PokemonController as pokemonCtrl" ng-init="pokemonCtrl.init()">
 
     <!-- Loading -->
     <div loading ng-if="pokemonCtrl.loading">
     </div>
 
-    <div class="pokemon__container" ng-if="!pokemonCtrl.loading">
+    <div class="card__container" ng-if="!pokemonCtrl.loading">
 
-        <!-- Pokemon info -->
-        <div class="pokemon__info">
+        <div class="card__info">
+            <div class="card__image">
+                <img ng-src="{{pokemonCtrl.pokemon.image}}" alt="Pokemon Image">
+            </div>
 
-            <div class="pokemon__card">
-                <div class="pokemon__image">
-                    <img ng-src="{{pokemonCtrl.pokemon.image}}" alt="Pokemon Image">
+            <div class="card__title">
+                {{ pokemonCtrl.pokemon.name }}
+            </div>
+
+            <div class="card__item">
+                <div class="card__subtitle">
+                    Number:
                 </div>
-
-                <div class="pokemon__name">
-                    {{ pokemonCtrl.pokemon.name }}
+                <div class="card__abilities__item">
+                    {{ pokemonCtrl.pokemon.id }}
                 </div>
             </div>
 
-            <div class="pokemon__caracteristics">
-                <div class="pokemon__caracteristics__item">
-                    <div class="pokemon__abilities__title">
-                        Abilities:
-                    </div>
-                    <ul class="pokemon__abilities__item">
-                        <li ng-repeat="abilities in pokemonCtrl.pokemon.abilities">
-                            {{ abilities.ability.name }}
-                        </li>
-                    </ul>
+            <div class="card__item">
+                <div class="card__subtitle">
+                    Abilities:
                 </div>
+                <ul class="card__abilities__item">
+                    <li ng-repeat="abilities in pokemonCtrl.pokemon.abilities">
+                        {{ abilities.ability.name }}
+                    </li>
+                </ul>
+            </div>
 
-                <div class="pokemon__caracteristics__item">
-                    <div class="pokemon__abilities__title">
-                        Experience:
-                    </div>
-                    <div class="pokemon__abilities__item">
-                        {{ pokemonCtrl.pokemon.experience }}
-                    </div>
+            <div class="card__item">
+                <div class="card__subtitle">
+                    Experience:
+                </div>
+                <div class="card__abilities__item">
+                    {{ pokemonCtrl.pokemon.experience }}
                 </div>
             </div>
 
+            <div class="card__item">
+                <div class="card__subtitle">
+                    Weight:
+                </div>
+                <div class="card__abilities__item">
+                    {{ pokemonCtrl.pokemon.weight }}
+                </div>
+            </div>
+
+            <div class="card__item">
+                <div class="card__subtitle">
+                    Height:
+                </div>
+                <div class="card__abilities__item">
+                    {{ pokemonCtrl.pokemon.height }}
+                </div>
+            </div>
         </div>
 
-        <!-- Comments -->
-        <div class="pokemon__comments" ng-controller="CommentController as commentCtrl" ng-init="commentCtrl.init()">
-            <div class="pokemon__comments_title">
-                Comments:
+        <div class="card__comments" ng-controller="CommentController as commentCtrl" ng-init="commentCtrl.init()">
+
+            <div class="card__block">
+                <div class="comments__title">
+                    Leave your comment:
+                </div>
+
+                <form class="comments__form" ng-submit="commentCtrl.send()">
+                    <div class="form__holder">
+                        <input class="form__input" required type="text" ng-model="commentCtrl.comment.new.user">
+                        <label class="form__label">Name</label>
+                        <span class="form__line"></span>
+                    </div>
+
+                    <div class="form__holder">
+                        <input class="form__input" required type="text" ng-model="commentCtrl.comment.new.text" >
+                        <label class="form__label">Message</label>
+                        <span class="form__line"></span>
+                    </div>
+
+                    <button class="form__button" type="submit" name="button">Send</button>
+                </form>
             </div>
 
-            <!-- Comments list -->
-            <ul class="pokemon__comments__list" ng-if="commentCtrl.comment.all.length">
-                <li class="pokemon__comments__item" ng-repeat="comment in commentCtrl.comment.all">
-                    <div class="pokemon__comments__text">
-                        {{comment.text}}
-                    </div>
-                    <div class="pokemon__comments__user">
-                        {{comment.user}}
-                    </div>
-                </li>
-            </ul>
+            <div class="card__block comments">
+                <div class="comments__title">
+                    Comments:
+                </div>
 
-            <!-- Without comments -->
-            <div class="pokemon__comments__without" ng-if="!commentCtrl.comment.all.length">
-                There isn't comments :(
+                <!-- Comments list -->
+                <ul class="comments__list" ng-if="commentCtrl.comment.all.length">
+                    <li class="comments__item" ng-repeat="comment in commentCtrl.comment.all">
+                        <div class="comments__name">
+                            {{comment.user}}
+                        </div>
+                        <div class="comments__text">
+                            {{comment.text}}
+                        </div>
+                    </li>
+                </ul>
+
+                <!-- Without comments -->
+                <div class="card__message" ng-if="!commentCtrl.comment.all.length">
+                    There aren't comments :(
+                </div>
+
+
             </div>
 
-            <!-- Form to comment -->
-            <!-- <form class="pokemon__comments__form" ng-submit="commentCtrl.send()">
-                <input class="pokemon__comments__input" ng-model="commentCtrl.comment.new.user" type="text" placeholder="Your name">
-                <input class="pokemon__comments__input" ng-model="commentCtrl.comment.new.text" type="text" placeholder="Your comment">
-
-                <button type="submit" name="button">Do it!</button>
-            </form> -->
         </div>
     </div>
 </div>
