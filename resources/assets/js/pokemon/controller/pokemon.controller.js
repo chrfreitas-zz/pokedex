@@ -21,7 +21,7 @@
             * Properties
             */
             scope.pokemon = {};
-            scope.loading = true;
+            scope.loader = true;
         }
 
         /**
@@ -32,7 +32,7 @@
             scope.$pokedex.get('pokemon', scope.$routeParams.id).then((response) => {
                 scope.pokemon = scope.PokemonModel;
                 scope.pokemon.setData(response);
-                scope.loading = false;
+                scope.loader = false;
             });
 
             return true;

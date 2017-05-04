@@ -68,12 +68,11 @@ gulp.task('less:watch', () => {
 
 gulp.task('vendor:bundle', () => {
 
-    gulp.src('lib/angular/angular.min.js')
-        .pipe(gulp.dest('public/lib/angular'));
+    gulp.src('vendor/angular/angular.min.js')
+        .pipe(gulp.dest('public/vendor/angular'));
 
-    gulp.src('lib/angular-route/angular-route.min.js')
-        .pipe(gulp.dest('public/lib/angular-route'));
-
+    gulp.src('vendor/angular-route/angular-route.min.js')
+        .pipe(gulp.dest('public/vendor/angular-route'));
 });
 
 gulp.task('all:bundle', () => {

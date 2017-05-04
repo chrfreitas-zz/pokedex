@@ -1,9 +1,9 @@
 
-describe('Pokedex', function() {
+describe('Home', function() {
 
     var scope,
         pokedex,
-        PokedexController;
+        HomeController;
 
 
     beforeEach(module('app'));
@@ -13,7 +13,7 @@ describe('Pokedex', function() {
         pokedex = $pokedex;
 
         scope = $rootScope.$new();
-        PokedexController = $controller('PokedexController as pokedexCtrl', {
+        HomeController = $controller('HomeController as homeCtrl', {
             '$scope': scope
         });
 
@@ -22,11 +22,11 @@ describe('Pokedex', function() {
     describe('Controller', function() {
 
         it('Constructor(): Check if $pokedex was loaded ', function(){
-            expect(scope.pokedexCtrl.$pokedex).toBeDefined();
+            expect(scope.homeCtrl.$pokedex).toBeDefined();
         });
 
         it('Init(): Check if the method is running without error during it', function(){
-            expect(scope.pokedexCtrl.init()).toBe(true);
+            expect(scope.homeCtrl.init()).toBe(true);
         });
 
     });

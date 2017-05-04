@@ -1,10 +1,10 @@
-<div class="pokedex" ng-controller="PokedexController as pokedexCtrl" ng-init="pokedexCtrl.init()">
+<div ng-controller="HomeController as homeCtrl" ng-init="homeCtrl.init()">
 
-    <div loading ng-if="pokedexCtrl.loading">
+    <div class="main__loader" loader ng-if="homeCtrl.loader">
     </div>
 
     <ul class="tiles">
-        <li class="tiles__item" ng-repeat="pokemon in pokedexCtrl.items">
+        <li class="tiles__item" ng-repeat="pokemon in homeCtrl.items">
             <a class="tiles__container" ng-href="/pokemon/{{pokemon.name}}">
 
                 <div class="tiles__thumb">

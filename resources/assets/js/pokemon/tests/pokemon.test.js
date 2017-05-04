@@ -34,20 +34,4 @@ describe('Pokemon', function() {
 
     });
 
-    describe('Model', function() {
-
-        it('New(): Check if the method building object correctly', function(){
-
-            var params = {
-                name: 'charizard'
-            }
-
-            var pokemon = new _PokemonModel(params);
-
-            expect(pokemon.name).toEqual('charizard');
-        });
-
-    });
-
-
 });

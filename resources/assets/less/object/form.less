@@ -1,15 +1,12 @@
-.form
-{
-    &__holder
-    {
+.form {
+    &__holder {
         height: 70px;
         overflow-x: hidden;
         overflow-y: visible;
         position: relative;
     }
 
-    &__input
-    {
+    &__input {
         background-color: transparent;
         border-color: @blue;
         border-style: none none solid;
@@ -23,10 +20,8 @@
         width: 100%;
 
         &:focus,
-        &:valid
-        {
-            ~ .form__label
-            {
+        &:valid {
+            ~ .form__label {
                 transition: all 0.125s ease;
                 color: @blue;
                 font-size: .75em;
@@ -34,18 +29,16 @@
             }
         }
 
-        &:focus {
+        &:focus  {
             outline: 0;
 
-            ~ .form__line
-            {
+            ~ .form__line {
                 transition: all 0.45s ease;
                 transform: translateX(0);
             }
         }
 
-        ~ .form__line
-        {
+        ~ .form__line {
             position: absolute;
             bottom: 0;
             left: 0;
@@ -61,8 +54,7 @@
 
     }
 
-    &__label
-    {
+    &__label {
         position: absolute;
         bottom: 20px;
         left: 0;
@@ -73,8 +65,7 @@
         pointer-events: none;
     }
 
-    &__button
-    {
+    &__button {
         font-weight: bold;
         font-size: 14px;
         background-color: @blue;
@@ -88,8 +79,7 @@
         cursor: pointer;
         transition: background-color .2s linear;
 
-        &:hover
-        {
+        &:hover {
             background-color: @dark-blue;
         }
     }

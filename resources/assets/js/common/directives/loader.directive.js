@@ -21,6 +21,6 @@
 
     }
 
-    angular.module('app').directive('loading', () => new Loading());
+    angular.module('app').directive('loader', () => new Loading());
 
 })(window.angular);

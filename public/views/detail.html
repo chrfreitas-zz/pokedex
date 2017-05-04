@@ -1,10 +1,11 @@
 <div class="card" ng-controller="PokemonController as pokemonCtrl" ng-init="pokemonCtrl.init()">
 
-    <!-- Loading -->
-    <div loading ng-if="pokemonCtrl.loading">
+    <div class="main__loader" loader ng-if="pokemonCtrl.loader">
     </div>
 
-    <div class="card__container" ng-if="!pokemonCtrl.loading">
+    <div class="card__container" ng-if="!pokemonCtrl.loader">
+
+        <a class="card__back" href="/">&times;</a>
 
         <div class="card__info">
             <div class="card__image">
@@ -16,19 +17,19 @@
             </div>
 
             <div class="card__item">
-                <div class="card__subtitle">
+                <strong class="card__subtitle">
                     Number:
-                </div>
-                <div class="card__abilities__item">
+                </strong>
+                <div class="card__specs">
                     {{ pokemonCtrl.pokemon.id }}
                 </div>
             </div>
 
             <div class="card__item">
-                <div class="card__subtitle">
+                <strong class="card__subtitle">
                     Abilities:
-                </div>
-                <ul class="card__abilities__item">
+                </strong>
+                <ul class="card__specs">
                     <li ng-repeat="abilities in pokemonCtrl.pokemon.abilities">
                         {{ abilities.ability.name }}
                     </li>
@@ -36,28 +37,28 @@
             </div>
 
             <div class="card__item">
-                <div class="card__subtitle">
+                <strong class="card__subtitle">
                     Experience:
-                </div>
-                <div class="card__abilities__item">
+                </strong>
+                <div class="card__specs">
                     {{ pokemonCtrl.pokemon.experience }}
                 </div>
             </div>
 
             <div class="card__item">
-                <div class="card__subtitle">
+                <strong class="card__subtitle">
                     Weight:
-                </div>
-                <div class="card__abilities__item">
+                </strong>
+                <div class="card__specs">
                     {{ pokemonCtrl.pokemon.weight }}
                 </div>
             </div>
 
             <div class="card__item">
-                <div class="card__subtitle">
+                <strong class="card__subtitle">
                     Height:
-                </div>
-                <div class="card__abilities__item">
+                </strong>
+                <div class="card__specs">
                     {{ pokemonCtrl.pokemon.height }}
                 </div>
             </div>

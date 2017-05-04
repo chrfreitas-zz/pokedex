@@ -4,7 +4,7 @@
 
     var scope = {};
 
-    class PokedexController {
+    class HomeController {
 
         constructor($pokedex){
 
@@ -19,17 +19,17 @@
             * Properties
             */
             scope.items = [];
-            scope.loading = true;
+            scope.loader = true;
         }
 
         /**
-        * Initialize PokedexController
+        * Initialize HomeController
         */
         init(){
 
             scope.$pokedex.get('pokemon/?limit=151&offset=0').then((response) => {
                 scope.items = response;
-                scope.loading = false;
+                scope.loader = false;
             });
 
             return true;
@@ -37,6 +37,6 @@
 
     }
 
-    angular.module('app').controller('PokedexController', PokedexController);
+    angular.module('app').controller('HomeController', HomeController);
 
 })(window.angular);
